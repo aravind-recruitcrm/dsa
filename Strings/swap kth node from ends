@@ -1,0 +1,39 @@
+// 
+class GFG
+{
+    //Function to swap Kth node from beginning and end in a linked list.
+    Node swapkthnode(Node head, int num, int K)
+    {
+        // your code here
+        Node i1=null,j1=null;
+        Node i=head,j=head;
+        for(int p=1;p<=K;p++ )
+        {
+            i1=i;
+            i=i.next;
+        }
+        System.out.println(i1.data);
+        System.out.println(i.data);
+         for(int q=1;q<=num-K+1;q++ )
+        {
+            j1=j;
+            j=j.next;
+        }
+        System.out.println(j1.data);
+        System.out.println(j.data);
+        
+        i1.next=j;
+        Node temp=j.next;
+        j.next=j1;
+        j1.next=i;
+        i.next=temp;
+        
+        for(Node q=head;q!=null;q=q.next )
+        {
+           System.out.println(q.data);
+           //i=i.next;
+        }
+        
+         return head;
+    }
+}
