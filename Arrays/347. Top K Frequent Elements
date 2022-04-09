@@ -1,0 +1,42 @@
+/*
+1.first we need to find the freq of elements using hashmap
+2. then we need to create a reverse treemap(same as hashmap that points values to keys pairs) this treemap automatically sort with freq with decreasing order 
+3.then take the requried k noof elements using for loop
+*/
+
+class Solution {
+    public int[] topKFrequent(int[] nums, int k) {
+        HashMap<Integer,Integer> map=new HashMap<>();
+        for(int i:nums)
+        {
+             map.put(i,map.getOrDefault(i,0)+1);
+            
+        }
+
+        TreeMap<Integer,ArrayList<Integer>> mapRev =new TreeMap<>(Collections.reverseOrder());
+
+        for(Map.Entry<Integer,Integer> e:map.entrySet())
+        {
+            int key = e.getKey();
+            int v = e.getValue();
+            if(!mapRev.containsKey(v)){
+                ArrayList<Integer> temp =new ArrayList<Integer>();
+                mapRev.put(v, temp);
+            }
+            mapRev.get(v).add(key);
+        }
+        
+        int[] ans = new int[k];
+        int pos = 0;
+        for(Integer i : mapRev.keySet()){
+            for(int ele : mapRev.get(i))
+            {
+                if(pos == k) return ans;
+                ans[pos++] = ele;
+            }
+        }
+
+
+        return ans;
+    }
+}
