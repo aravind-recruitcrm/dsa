@@ -1,0 +1,33 @@
+/*
+1.BC length until 1 
+2.create a temp array of length n-1 and calculate the sum 
+3.recursion of temp array
+4.print the original array before the sum
+
+
+https://www.geeksforgeeks.org/sum-triangle-from-array/
+*/
+
+import java.io.*;
+import java.util.*;
+
+class GFG {
+    public static void fun(int[] arr)
+    {
+        if(arr.length<1)
+        return ;
+        int temp[]=new int[arr.length-1];
+        for(int i=0;i<arr.length-1;i++)
+        {
+            temp[i]=arr[i]+arr[i+1];
+        }
+        fun(temp);
+        System.out.println(Arrays.toString(arr));
+        
+    }
+	public static void main (String[] args) {
+	    int arr[]={1,2,3,4,5};
+	    fun(arr);
+	    
+	}
+}
