@@ -1,0 +1,33 @@
+/*  
+708.binary search
+
+check if right<left then return -1 that means element is not exists
+if target found return index
+then if mid <target recurse through mid-1
+else recurse through mid+1
+
+*/class Solution {
+    public int fun(int [] nums,int target,int left,int right)
+    {
+        System.out.println(left+ " "+right);
+       
+        if(left>right)
+        {
+            return -1;
+        }
+        int mid=left+(right-left)/2;
+         System.out.println(mid);
+        if(nums[mid]==target)
+        {
+            return mid;
+        }
+        if(nums[mid]<target)
+            return fun(nums,target,mid+1,right);
+        else
+            return fun(nums,target,left,mid-1);
+    }
+    public int search(int[] nums, int target) {
+        return fun(nums,target,0,nums.length-1);
+        
+    }
+}
