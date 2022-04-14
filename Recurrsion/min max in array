@@ -1,0 +1,35 @@
+
+/*
+find min,max value in array using the recurssion;
+
+the recurssion array will have the (array,min,max,position) as parameters
+1.BC check if it reached the last length or not 
+2.logic:
+compare min value and present value and max value with max value 
+3.fun call:
+increment the position 
+*/
+
+import java.io.*;
+import java.util.*;
+
+class GFG {
+    public static void fun(int[] arr,int min,int max,int pos)
+    {
+        if(pos==arr.length){
+         System.out.println(min);
+         System.out.println(max);
+         System.out.println("end");
+         return ;
+        }
+        max=Math.max(max,arr[pos]);
+        min=Math.min(min,arr[pos]);
+        fun(arr,min,max,++pos);
+
+    }
+	public static void main (String[] args) {
+	    int arr[]={-155,2,3,4,5000};
+	    fun(arr,Integer.MAX_VALUE,Integer.MIN_VALUE,0);
+	    
+	}
+}
