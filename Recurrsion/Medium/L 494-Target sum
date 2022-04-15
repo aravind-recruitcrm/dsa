@@ -1,0 +1,28 @@
+class Solution {
+    public void  fun(int[] nums,int target,int index,int count,int value)
+    {
+        
+        if(index > nums.length-1)
+        {
+
+            if(target==0){ 
+                System.out.println(count);
+                ++count;
+        }
+            return ;
+        }
+        // System.out.println(++value);
+        // System.out.println(target-nums[index]);
+        fun(nums,target-nums[index],index+1,count,value); 
+        // System.out.println("innet");
+        fun(nums,target+nums[index],index+1,count,value);
+        
+    }
+    public int findTargetSumWays(int[] nums, int target) {
+        int count=0;
+        int value=0;
+        fun(nums,target,0,count,value);
+        return count;
+        
+    }
+}
