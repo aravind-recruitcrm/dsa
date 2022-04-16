@@ -1,0 +1,66 @@
+class Solution {
+        long count=0;
+        boolean flag=true;
+    public int countGoodNumbers(long n) {
+        StringBuilder st=new StringBuilder();
+        for(long i=0;i<n;i++)
+        {
+            st.append("9");
+        }
+        long range =Integer.parseInt(st.toString());
+        
+        fun(range);
+        System.out.println(range);
+        return (int)count%1000000007;
+    }
+    public void fun(long range)
+    {  System.out.println("1");
+        if(range == 0)
+        {
+            // if(range==0)
+            // {
+                // count++;
+                return;
+            // }    
+        }
+        
+        fun(range/10);
+     System.out.println("for count");
+         if(!fun2(range)){
+             System.out.println("jd");
+             count=count+1;
+             System.out.println("count"+count);
+             count=count%1000000007;
+             }
+        
+        
+        
+        
+    }
+    public boolean fun2(long range)
+    {
+        if(range==0)
+        {
+            // count++;
+            return true;
+        }
+         if(!(fun2(range/10)))
+            return false;
+        // return fun2(range/10);
+        int bit=(int)range%10;
+        if(flag){
+        System.out.println(true);
+             flag=false;
+            if(bit%2!=0)
+                return false;
+        }
+        else 
+        {
+            System.out.println(false);
+            flag=true;
+            if(!(bit==2||bit==3||bit==5||bit==7))
+                return false;
+        }
+        return false;
+    }
+}
