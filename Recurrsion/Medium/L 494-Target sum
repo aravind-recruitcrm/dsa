@@ -1,27 +1,37 @@
+/*
+494. Target Sum
+
+BC:
+if(reached length) and target==0 then count++
+Call:
+recurse by index+1 
+recurse by index-1
+
+*/
 class Solution {
-    public void  fun(int[] nums,int target,int index,int count,int value)
+    int count=0;
+    public void fun(int[] nums,int target,int index,int value)
     {
         
         if(index > nums.length-1)
         {
 
             if(target==0){ 
-                System.out.println(count);
-                ++count;
+                count++;
+
+            }
+            return;
         }
-            return ;
-        }
-        // System.out.println(++value);
-        // System.out.println(target-nums[index]);
-        fun(nums,target-nums[index],index+1,count,value); 
-        // System.out.println("innet");
-        fun(nums,target+nums[index],index+1,count,value);
+
+        fun(nums,target-nums[index],index+1,value); 
+
+        fun(nums,target+nums[index],index+1,value);
         
     }
     public int findTargetSumWays(int[] nums, int target) {
-        int count=0;
+
         int value=0;
-        fun(nums,target,0,count,value);
+        fun(nums,target,0,value);
         return count;
         
     }
