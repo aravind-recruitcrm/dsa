@@ -1,0 +1,78 @@
+// class Solution {
+//     public String digitSum(String s, int k) {
+//         String res="";
+//         int sum=0;
+//         int pos=0;
+//         int i=0;
+//         while(s.length()>k)
+//         {
+//             for(int j=0;j<s.length();j++)
+//             {
+//             // System.out.println(s.charAt(j)-'0');
+//             if(i==3)
+//             {
+//                 res+=sum;
+//                 // System.out.println(res);
+//                 i=0;
+//                 sum=0;
+//             } 
+//              else
+//              {
+//                  sum +=s.charAt(j)-'0';
+//                 i++;
+                
+//             }}
+//             if(i!=0 && sum!=0)
+//             {
+//                 res+=sum;
+//                 i=0;
+//                 sum=0;
+//             }
+                
+//             s=res;
+//             // pos=0;
+                
+//         }
+//         // System.out.println(s);
+//         return s;
+//     }
+// }
+
+
+/*
+2243. Calculate Digit Sum of a String
+https://leetcode.com/contest/weekly-contest-289/problems/calculate-digit-sum-of-a-string/
+->Traverse through the s string and the elements silmultaneously
+->keep adding the string elements until reach the k, 
+    ->If i==k, concatenate the sum to the temp string
+    ->After traversing the 's' string if there is lefet over sum append it to the temp
+    ->Finally replace the 'S' with the temp string, iterate while loop until s.length<k
+*/
+class Solution {
+    public String digitSum(String s, int k) {
+        while(s.length()>k)
+        {
+            String temp = "";
+            int sum = 0;
+            int i = 0;
+            for(char ch : s.toCharArray())
+            {
+                sum += ch - '0';
+                i++;
+                if(i==k)
+                {
+                    temp += sum;
+                    sum = 0;
+                    i = 0;
+                }
+            }
+            if(i<k && i!=0) 
+            {
+                temp += sum;
+            }
+            s = temp;
+        }
+        
+        return s;
+    }
+}
