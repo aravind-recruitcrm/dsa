@@ -1,0 +1,51 @@
+/*
+ take 3 different linked list that store the less than given value
+ another linked list store the equal value
+ and linked list that store the value greater than the given value
+ finally merge all the linked list
+keep less_dummy for sta
+*/
+class Solution {
+    public static Node partition(Node node, int x) {
+        Node less =new Node(0);
+        Node less_dum=less;
+        Node equal=new Node(0);
+        Node equal_dum=equal;
+        Node greater=new Node(0);
+        Node greater_dum=greater;
+        for(Node temp=node;temp!=null;temp=temp.next)
+        {
+            Node value=new Node(temp.data);
+            if(temp.data<x)
+            {
+                less.next=value;
+                less=less.next;
+                continue;
+            }
+            if(temp.data==x)
+            {
+                equal.next=value;
+                equal=equal.next;
+                continue;
+            }
+            else
+            greater.next=value;
+            greater=greater.next;
+            
+        }
+        
+        
+        if(equal_dum.next==null)
+        {
+            less.next=greater_dum.next;
+        }
+        else
+        less.next=equal_dum.next;
+        if(greater_dum.next==null)
+        return less_dum.next;
+        else
+        equal.next=greater_dum.next;
+        
+        return less_dum.next;
+    }
+}
