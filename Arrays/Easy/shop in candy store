@@ -1,0 +1,49 @@
+
+/*shop in candy store
+
+https://practice.geeksforgeeks.org/problems/shop-in-candy-store1145/1#
+
+-- first sort the array
+-- keep two pointer left and right
+-- to find the minimum cost try to buy the least cost item and get the highest item as free
+-- to find the maxinum cost try to buy the max cost item and get the min cost item
+
+*/
+
+class Solution{
+    static ArrayList<Integer> candyStore(int candies[],int N,int K){
+        // code here
+        Arrays.sort(candies);
+        ArrayList<Integer> res=new ArrayList<>();
+        // res.add(10);
+        // res.add(78);
+        int left=0;
+        int right=N-1;
+        int count=0;
+        while(left <= right)
+        {
+           count+=candies[left];
+           left++;
+           if(K==1)
+           right--;
+            else if(K!=0)
+           right-=K;
+           
+        }
+        res.add(count);
+        count=0;
+        left=0;
+        right=N-1;
+        while(left<=right)
+        {
+            count+=candies[right];
+            right--;
+            if(K==1)
+            left++;
+            else if(K!=0)
+            left+=K;
+        }
+        res.add(count);
+        return res;
+    }
+}
