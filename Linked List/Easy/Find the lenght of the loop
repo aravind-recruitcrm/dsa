@@ -1,0 +1,40 @@
+/*
+-- Find length of the loop 
+
+
+-- we have only the head of the node
+-- so we use the slow and fast method and find the point where the cycle start
+-- we will use that point and find the count and return it
+*/
+class Solution
+{
+    //Function to find the length of a loop in the linked list.
+    static int fun(Node n)
+    {
+        // Node pos=n;
+        Node temp=n;
+        int count=1;
+        while(temp.next!=n)
+        {
+            count++;
+            temp=temp.next;
+        }
+        return count;
+    }
+    static int countNodesinLoop(Node head)
+    {
+        Node first=head,second=head;
+        while(second!=null && second.next!=null)
+        {
+            first=first.next;
+            second=second.next.next;
+            if(first==second)
+            {
+                // System.out.println(first.data);
+                return fun(first);
+            }
+        }
+        return 0;
+
+    }
+}
