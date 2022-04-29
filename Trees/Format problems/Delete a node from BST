@@ -1,0 +1,51 @@
+
+/*
+Delete a node from BST
+
+https://www.youtube.com/watch?v=petKaikRiIA&list=PLUcsbZa0qzu3yNzzAxgvSgRobdUUJvz7p&index=68
+
+--check if root is empty or not
+--traverse according to the direction of x <root.data and x> root.data
+-- if root.data==x then
+    check the node is a leaf node or others
+    if node is having only the right elements then return them to the parent
+    if node is having  only the left elements then return them to the parent
+    if node having both left-subtree and right-subtree then take the min value from the right-subtree and replace with the parent
+finally the root is return;
+*/
+
+class Tree {
+    // Function to delete a node from BST.
+    public static Node deleteNode(Node root, int X) {
+       if(root==null)
+       return root;
+       if(X < root.data)
+       {
+           root.left=deleteNode(root.left,X);
+       }
+       else if(X > root.data)
+       {
+           root.right=deleteNode(root.right,X);
+       }
+       else
+       {
+           if(root.left==null)
+                 return root.right;
+           if(root.right==null)
+                 return root.left;
+           root.data=findValue(root.right);
+           
+           root.right=deleteNode(root.right,root.data);
+          
+       }
+        return root;
+    }
+    public static int findValue(Node root)
+    {
+        // int minValue=root.data;
+        while(root.left!=null)
+            root=root.left;
+        return root.data;
+    }
+   
+}
