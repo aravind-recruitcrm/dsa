@@ -1,0 +1,20 @@
+class Solution {
+    public int countPrefixes(String[] words, String s) {
+        // StringBuilder sb=new StringBuilder();
+        String sb="";
+        int count=0;
+        for(int i=0;i<s.length();i++)
+        {
+            sb=sb+s.charAt(i);
+            // String  val=sb.toString();
+            for(String j : words)
+            {
+             
+                if(sb.equals(j))
+                    count++;
+            }
+        }
+        return count;
+        
+    }
+}
