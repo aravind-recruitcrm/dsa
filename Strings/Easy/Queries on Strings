@@ -1,0 +1,38 @@
+// 2256. Minimum Average Difference
+/*
+-- use the left sum and right sum concept
+*/
+class Solution {
+        int index;
+    public int minimumAverageDifference(int[] nums) {
+        int min=Integer.MAX_VALUE;
+        int sum=0;
+        int lsum=0;
+        int rsum=0;
+        for(int i=0;i<nums.length;i++)
+                sum=sum+nums[i];
+        
+        for(int i=0;i<nums.length;i++)
+        {
+            int val=0;
+            lsum+=nums[i];
+            rsum=sum-lsum;
+        
+            int rightValue=nums.length-(i+1);
+        
+            if(rightValue==0)
+                val=lsum/(i+1);
+            else
+                val=Math.round(Math.abs((lsum/(i+1))-(rsum/rightValue)));
+            if(val<min)
+            {
+                min=val;
+                index=i;
+            }
+                
+            
+        }
+        
+        return index;
+    }
+}
