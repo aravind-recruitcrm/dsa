@@ -1,0 +1,29 @@
+
+//User function Template for Java
+/*
+find a pair with target in bst
+https://www.youtube.com/watch?v=SVBZW18Ei_o&list=PLUcsbZa0qzu3yNzzAxgvSgRobdUUJvz7p&index=71
+*/
+class Solution
+{
+    // root : the root Node of the given BST
+    // target : the target sum
+    public int isPairPresent(Node root, int target)
+    {
+        HashSet<Integer> set=new HashSet<>();
+        boolean ans=fun(root,target,set);
+        return ans==true ? 1: 0;
+        
+    }
+    public boolean fun(Node root,int target,Set<Integer> set)
+    {
+        if(root==null)
+        return false;
+        if(fun(root.left,target,set)==true)
+            return true;
+        if(set.contains(target-root.data))
+            return true;
+        set.add(root.data);
+         return fun(root.right,target,set);
+    }
+}
