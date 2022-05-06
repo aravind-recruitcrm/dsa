@@ -1,0 +1,54 @@
+/*
+diameter of a binary tree 
+ same as find height of a binary tree 
+ see striver video for reference
+ 
+*/
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    //int ans=0;
+    public int diameterOfBinaryTree(TreeNode root) {
+    //     if(root==null)
+    //         return 0;
+    //     int left=diameterOfBinaryTree(root.left);
+    //     int right=diameterOfBinaryTree(root.right);
+    //     int value=height(root.left)+height(root.right)+1;
+    //     return Math.max(value,Math.max(left,right));
+    // }
+    // public int height(TreeNode root){
+    //     if(root ==null)
+    //         return 0;
+    //      return Math.max(height(root.left),height(root.right))+1;
+        int res[]=new int[1];
+        fun(root,res);
+        return res[0];
+        
+     
+        
+    }
+    public int fun(TreeNode root,int[] res){
+        
+    
+       if(root==null)
+            return 0;
+        int left=fun(root.left,res);
+        int right=fun(root.right,res);
+        res[0]=Math.max(res[0],left+right);
+        return Math.max(left,right)+1;
+    }
+}
