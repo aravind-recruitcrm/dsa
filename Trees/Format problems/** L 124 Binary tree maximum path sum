@@ -1,0 +1,60 @@
+/*
+Binary tree maximum path sum
+
+same as diameter of  a binary tree problem 
+see     https://www.youtube.com/watch?v=WszrfSwMz58&list=PLgUwDviBIf0q8Hkd7bK2Bpryj2xVJk8Vk&index=18
+*/
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+// class Solution {
+//     public int maxPathSum(TreeNode root) {
+//         int res[]=new int[1];
+//         res[0]=Integer.MIN_VALUE;
+//         fun(root,res);
+//         return res[0];
+        
+        
+//     }
+//     public int fun(TreeNode root,int[] res)
+//     {
+//         if(root==null)
+//             return 0;
+//         int left=Math.max(0,fun(root.left,res));
+//         int right=Math.max(0,fun(root.right,res));
+//         res[0]=Math.max(res[0],left+right+root.val);
+//         return Math.max(left,right)+root.val;
+//     }
+// }
+
+
+public class Solution {
+    int maxValue;
+    
+    public int maxPathSum(TreeNode root) {
+        maxValue = Integer.MIN_VALUE;
+        maxPathDown(root);
+        return maxValue;
+    }
+    
+    private int maxPathDown(TreeNode node) {
+        if (node == null) return 0;
+        int left = Math.max(0, maxPathDown(node.left));
+        int right = Math.max(0, maxPathDown(node.right));
+        maxValue = Math.max(maxValue, left + right + node.val);
+        return Math.max(left, right) + node.val;
+    }
+}
