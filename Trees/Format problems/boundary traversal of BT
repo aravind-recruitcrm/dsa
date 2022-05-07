@@ -1,0 +1,181 @@
+/*
+ boundary traversal of BT 
+  see striver
+  
+  -- take the three methods first calculate the left answer 
+  - second used to find the leaf nodes 
+  --third used to find the right nodes in reverse order
+  
+*/
+//User function Template for Java
+
+// class Node  
+// { 
+//     int data; 
+//     Node left, right; 
+   
+//     public Node(int d)  
+//     { 
+//         data = d; 
+//         left = right = null; 
+//     } 
+// }
+
+class Solution
+{
+	ArrayList <Integer> boundary(Node node)
+	{
+	     ArrayList < Integer > ans = new ArrayList < Integer > ();
+        if (isLeaf(node) == false) ans.add(node.data);
+        addLeftBoundary(node, ans);
+        addLeaves(node, ans);
+        addRightBoundary(node, ans);
+        return ans;
+	}
+// 	    Node nodeDup=node;
+// 	    while(node.left!=null && node.right!=null)
+// 	    {
+// 	        if(node.left!=null)
+// 	        {
+// 	            res.add(node.data);
+// 	            node=node.left;
+// 	        }
+// 	        else 
+// 	        {
+// 	            res.add(node.data);
+// 	            node=node.right;
+// 	        }
+	        
+// 	    }
+// 	    System.out.println(res);
+// 	   node=nodeDup;
+// 	        fun(node);
+// 	       // System.out.println(res);
+// 	       // System.out.println("dlkfjk");
+// 	       nodeDup=nodeDup.right;
+// 	  int size=res.size();
+// 	  if(nodeDup!=null){
+// 	   while(nodeDup.left!=null && nodeDup.right!=null)
+// 	    {
+// 	        if(nodeDup.right!=null)
+// 	        {
+// 	            res.add(size,nodeDup.data);
+// 	            nodeDup=nodeDup.right;
+// 	        }
+// 	        else 
+// 	        {
+// 	            res.add(size,nodeDup.data);
+// 	            nodeDup=nodeDup.left;
+// 	        }
+	        
+// 	    }}
+// 	   return res;
+// 	}
+// 	void fun(Node node)
+// 	{
+// 	   // System.out.println("dlkfjk");
+// 	    if(isLeaf(node))
+// 	    {
+// 	        res.add(node.data);
+// 	        return ;
+// 	    }
+	        
+// 	    if(node.left!=null)
+// 	        fun(node.left);
+//         if(node.right!=null)
+//         fun(node.right);
+//         // System.out.println(node.data);
+	       
+// 	   // fun(node.right);
+// 	}
+// 	boolean isLeaf(Node node)
+// 	{
+// 	    if(node.left==null && node.right==null)
+// 	        return true;
+// 	    else
+// 	        return false;
+// 	}
+
+    Boolean isLeaf(Node root) {
+        return (root.left == null) && (root.right == null);
+    }
+
+    void addLeftBoundary(Node root, ArrayList < Integer > res) {
+        Node cur = root.left;
+        while (cur != null) {
+            if (isLeaf(cur) == false) res.add(cur.data);
+            if (cur.left != null) cur = cur.left;
+            else cur = cur.right;
+        }
+    }
+     void addRightBoundary(Node root, ArrayList < Integer > res) {
+        Node cur = root.right;
+        ArrayList < Integer > tmp = new ArrayList < Integer > ();
+        while (cur != null) {
+            if (isLeaf(cur) == false) tmp.add(cur.data);
+            if (cur.right != null) cur = cur.right;
+            else cur = cur.left;
+        }
+        int i;
+        for (i = tmp.size() - 1; i >= 0; --i) {
+            res.add(tmp.get(i));
+        }
+    }
+
+     void addLeaves(Node root, ArrayList < Integer > res) {
+        if (isLeaf(root)) {
+            res.add(root.data);
+            return;
+        }
+        if (root.left != null) addLeaves(root.left, res);
+        if (root.right != null) addLeaves(root.right, res);
+    }
+    }
+
+
+
+
+
+
+// static Boolean isLeaf(Node root) {
+//         return (root.left == null) && (root.right == null);
+//     }
+
+//     static void addLeftBoundary(Node root, ArrayList < Integer > res) {
+//         Node cur = root.left;
+//         while (cur != null) {
+//             if (isLeaf(cur) == false) res.add(cur.data);
+//             if (cur.left != null) cur = cur.left;
+//             else cur = cur.right;
+//         }
+//     }
+//     static void addRightBoundary(Node root, ArrayList < Integer > res) {
+//         Node cur = root.right;
+//         ArrayList < Integer > tmp = new ArrayList < Integer > ();
+//         while (cur != null) {
+//             if (isLeaf(cur) == false) tmp.add(cur.data);
+//             if (cur.right != null) cur = cur.right;
+//             else cur = cur.left;
+//         }
+//         int i;
+//         for (i = tmp.size() - 1; i >= 0; --i) {
+//             res.add(tmp.get(i));
+//         }
+//     }
+
+//     static void addLeaves(Node root, ArrayList < Integer > res) {
+//         if (isLeaf(root)) {
+//             res.add(root.data);
+//             return;
+//         }
+//         if (root.left != null) addLeaves(root.left, res);
+//         if (root.right != null) addLeaves(root.right, res);
+//     }
+//     static ArrayList < Integer > printBoundary(Node node) {
+//         ArrayList < Integer > ans = new ArrayList < Integer > ();
+//         if (isLeaf(node) == false) ans.add(node.data);
+//         addLeftBoundary(node, ans);
+//         addLeaves(node, ans);
+//         addRightBoundary(node, ans);
+//         return ans;
+//     }
