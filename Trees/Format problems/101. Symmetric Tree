@@ -1,0 +1,41 @@
+/*
+--Symmetric tree
+-- to check symmetric we need to check the value of the left node and right node
+-- and also check that lefttree.left is equal to righttree.right
+-- and also check that lefttree.right is equal to righttree.left
+-- if all conditions satisfy then it is a symmetric tree
+
+*/
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        // if(root==null)
+        //     return ;
+        return fun(root.left,root.right);
+        
+    }
+    public boolean fun(TreeNode leftT,TreeNode rightT)
+    {
+        if(leftT==null || rightT==null)
+            return leftT==rightT;
+        
+        if(leftT.val != rightT.val)
+            return false;
+        
+        return (fun(leftT.left,rightT.right) && fun(leftT.right,rightT.left)); 
+    }
+}
