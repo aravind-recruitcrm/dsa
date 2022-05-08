@@ -1,0 +1,44 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+
+/*
+2265. Count Nodes Equal to Average of Subtree
+
+-- use the array that contain the sum of all subtree nodes and number of nodes and calculate the avg and if it equals to node val then increment the counter;
+*/
+class Solution {
+     int count=0;
+    public int averageOfSubtree(TreeNode root) {
+        fun(root);
+        return count;
+        
+    }
+    public int[] fun(TreeNode node)
+    {
+        if(node==null)
+            return new int[]{0,0};
+        int left[]=fun(node.left);
+        int right[]=fun(node.right);
+        
+        int arr[]=new int[2];
+        arr[0]=node.val+left[0]+right[0];
+        arr[1]=1+left[1]+right[1];
+        
+        if(arr[0]/arr[1]==node.val)
+            count++;
+        return arr;
+    }
+}
