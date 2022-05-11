@@ -1,0 +1,33 @@
+/*
+L 1641 count sorted vowels strings
+
+we need to find the pattern in this series  by taking n=1,2,3.4..
+
+by this we can see a pattern that 
+ n=1 [5,4,3,2,1]
+ n=2 [15,10,6,3,1]
+ n=3 [35,20,10,4,1]....
+ 
+ so to solve this we need to take [1,1,1,1,1] at starting 
+ then do the postsum for that array for n times
+do so on..
+*/
+
+class Solution {
+    public int countVowelStrings(int n) {
+        if(n==0)
+            return 0;
+        int arr[]={1,1,1,1,1};
+        while(n-- > 0)
+        {
+            int sum=0;
+            for(int i=4;i>=0;i--)
+            {
+                arr[i]+=sum;
+                sum=arr[i];
+            }
+    
+        }
+        return arr[0];
+    }
+}
