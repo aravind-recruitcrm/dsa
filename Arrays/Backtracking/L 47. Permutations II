@@ -1,0 +1,46 @@
+/*
+47. Permutations II
+ see striver vide0
+ we can observe a patteren that where each index is swapping from left to right 
+ and we increment the index and again do the swapping from left to right
+
+*/
+
+class Solution {
+    public List<List<Integer>> permuteUnique(int[] nums) {
+     HashSet<List<Integer>> res=new HashSet<>();
+        fun(0,nums,res);
+        return new ArrayList<>(res);
+        
+    }
+    void fun(int index,int[] nums,Set<List<Integer>> res)
+    {
+        // if we reach the length that means one answer is got so add to the set
+        if(index >= nums.length)
+        {
+            List<Integer> list =new ArrayList<>();
+            for(int i=0;i<nums.length;i++)
+            {
+                list.add(nums[i]);
+            }
+            res.add(list);
+            return ;
+        }
+        //we do the recursion from index to length before it we swap the index and i and then we do backtrack by again swap that makes the nums as original  
+        for(int i=index;i<nums.length;i++)
+        {
+            swap(index,i,nums);
+            fun(index+1,nums,res);
+            swap(index,i,nums);
+        }
+    }
+    void swap(int index,int i,int[] nums)
+    {
+        int temp=nums[index];
+        nums[index]=nums[i];
+        nums[i]=temp;
+    }
+    
+}
+
+
