@@ -1,0 +1,61 @@
+/*
+236. Lowest Common Ancestor of a Binary Tree
+
+Algo:
+
+-- the two required nodes may be
+    1 different sub trees 
+        if two are  belongs to different subtree then we need to return parentNode of the two nodes
+    2. or in the same subtree
+        if  two are same subtree then we need to return first node which is got 
+        
+-- by this rule if we found the value then return it 
+-- then recurse to left and right 
+-- check the conditions that 
+    both are not null means rerturn the node 
+-- if left  or right is not null means we got the answer 
+
+*/ 
+
+
+class Solution {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if(root==null || root==p || root== q)
+            return root;
+        
+        TreeNode left=lowestCommonAncestor(root.left,p,q);
+        TreeNode right=lowestCommonAncestor(root.right,p,q);
+        
+        if(left!=null && right!=null)
+            return root;
+        
+        if(left!=null)
+            return left;
+        
+        if(right!=null)
+            return right;
+        return null;
+    }
+}
+
+// class Solution {
+//     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+//         //base case
+//         if (root == null || root == p || root == q) {
+//             return root;
+//         }
+//         TreeNode left = lowestCommonAncestor(root.left, p, q);
+//         TreeNode right = lowestCommonAncestor(root.right, p, q);
+
+//         //result
+//         if(left == null) {
+//             return right;
+//         }
+//         else if(right == null) {
+//             return left;
+//         }
+//         else { //both left and right are not null, we found our result
+//             return root;
+//         }
+//     }
+// }
