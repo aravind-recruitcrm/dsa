@@ -1,0 +1,81 @@
+/* 
+863. All Nodes Distance K in Binary Tree
+
+see striver video (reference)
+
+algo:
+1.
+first we need to link the child nodes to parent nodes by using the any traversal and store the linking of children to parent in the hashmap
+2.
+then we need a hashset to store the visitd nodes that should not  cover again
+3.
+we use the queue to find the kthe distance node 
+first we add the root to the queue 
+then we increment the level at we are now 
+and add all the left ,right, top child of the current node
+this process until we reach the k the level
+finally the kth level nodes will be remain in the queue
+we print that nodes which are in the queue
+
+
+*/
+class Solution {
+    public List<Integer> distanceK(TreeNode root, TreeNode target, int k) {
+        HashMap<TreeNode,TreeNode> Top=new HashMap<>();
+        HashSet<TreeNode> visited=new HashSet<>();
+        Queue<TreeNode> queue =new LinkedList<>();
+        connectingTop(root,Top);  // calling this fun to make the child to parent link and store int the "top" hashset
+        
+        queue.offer(target);// adding the root element into the queue and visited hashset
+        visited.add(target);
+        int cur_level=0;
+        while(!queue.isEmpty())
+        {
+            if(cur_level==k) break;// if we reach the required level break 
+            
+            int size=queue.size();
+            cur_level++;
+            for(int i=0;i<size;i++)
+            {
+                TreeNode val=queue.poll();
+                if(val.left!=null && visited.contains(val.left)==false)
+                {
+                    queue.offer(val.left);
+                    visited.add(val.left);
+                    
+                }
+                
+                if(val.right!=null && visited.contains(val.right)==false)
+                {
+                    queue.offer(val.right);
+                    visited.add(val.right);
+                    
+                }
+                if(Top.get(val)!=null && visited.contains(Top.get(val))==false)
+                {
+                    queue.offer(Top.get(val));
+                    visited.add(Top.get(val));
+                }
+            }
+        }
+        List<Integer> result=new ArrayList<>();
+        while(!queue.isEmpty()) // printing the remaning elements in the queue that are the kth node elements
+        {
+            TreeNode current= queue.poll();
+            result.add(current.val);
+        }
+        return result;
+    }
+    public void connectingTop(TreeNode root, Map Top)
+    {
+        if(root == null)
+            return ;
+        if(root.left!=null)
+            Top.put(root.left,root);
+        if(root.right!=null)
+            Top.put(root.right,root);
+        
+        connectingTop(root.left,Top);
+        connectingTop(root.right,Top);
+    }
+}
