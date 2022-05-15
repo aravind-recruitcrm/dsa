@@ -1,0 +1,41 @@
+/*
+ceil in BST
+  
+  see striver video
+*/
+// User function Template for Java
+
+class Tree {
+    // Function to return the ceil of given number in BST.
+    int ans = Integer.MAX_VALUE;
+    int findCeil(Node root, int key) {
+        if (root == null) return -1;
+        // Code here
+        helper(root, key);
+        
+        if(ans==Integer.MAX_VALUE) return -1;
+        
+        return ans;
+    }
+    
+    void helper(Node root, int key)
+    {
+        if(root==null) return;
+        
+        if(root.data==key)
+        {
+            ans = root.data;
+            return;
+        }
+        else if(root.data>key)
+        {
+            ans = Math.min(ans, root.data);
+            helper(root.left, key);
+            return;
+        }
+        else
+        {
+            helper(root.right, key);
+        }
+    }
+}
