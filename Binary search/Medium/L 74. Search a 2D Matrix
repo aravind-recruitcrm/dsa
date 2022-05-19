@@ -1,0 +1,42 @@
+/*
+74. Search a 2D Matrix
+
+ algo:
+ first we check the first and last element of each row ,if it is in the range then we do BS on the row
+ if then the element is not  in the range then we chech the next row
+*/
+class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        for(int i=0;i<matrix.length;i++)
+        {
+            int last=matrix[i].length-1;
+            
+            if(matrix[i][0] == target || matrix[i][last]==target)
+                return true;
+            if(matrix[i][0] < target  && matrix[i][last] > target)
+            {
+                 return fun(matrix[i],target);
+            }
+                
+        }
+        return false;
+    }
+    public boolean fun(int[] arr,int target)
+    {
+        int left=0;
+        int right=arr.length-1;
+        while(left <= right)
+        {
+            int mid=left+(right-left)/2;
+            if(arr[mid] == target )
+                return true;
+            if(arr[mid] < target)
+                left=mid+1;
+                
+            else
+                right=mid-1;
+                
+        }
+        return false;
+    }
+}
