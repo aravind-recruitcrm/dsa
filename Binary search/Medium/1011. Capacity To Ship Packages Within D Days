@@ -1,0 +1,79 @@
+/*
+1011. Capacity To Ship Packages Within D Days
+algo:
+use the binary search on answer
+
+
+
+
+
+*/
+//     public int shipWithinDays(int[] weights, int days) {
+//         int left=0,right=0;
+//         for(int i : weights)
+//         {
+//             left=Math.max(left,i);
+//             right+=i;
+//         }
+//         int ans=0;
+//         int sum=0;
+//         int mid=0;
+//         while(left < right)
+//         {
+//         int count=1;
+//            mid= left+(right-left)/2;
+//             for(int i: weights)
+//             {
+//                 if(sum + i > mid)
+//                 {
+//                     sum=i;
+//                     count++;
+                    
+//                 }
+//                 else
+//                 {
+//                     sum+=i;
+//                 }
+//             }
+//             // System.out.println(count);
+//             // if(count ==days)
+//             //     return mid;
+//         System.out.println(left+" "+mid+" "+right);
+//             if(count <= days){
+//                 right=mid;
+//                 // ans=mid;
+//                 // left=mid+1;
+//             }
+               
+//             else
+//                 left=mid+1;
+//                // right=mid;
+//         }
+//         // System.out.println(left+" "+mid+" "+right);
+//         return left;
+//     }
+// }
+
+
+class Solution {
+    public int shipWithinDays(int[] weights, int D) {
+        int left = 0, right = 0;
+        for (int w: weights) {
+            left = Math.max(left, w);
+            right +=w;
+        }
+        while (left < right) {
+            int mid = (left + right) / 2, need = 1, cur = 0;
+            for (int w: weights) {
+                if (cur + w > mid) {
+                    need += 1;
+                    cur = 0;
+                }
+                cur += w;
+            }
+            if (need > D) left = mid + 1;
+            else right = mid;
+        }
+        return left;
+    }
+}
