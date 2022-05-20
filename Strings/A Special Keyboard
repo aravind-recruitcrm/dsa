@@ -1,0 +1,35 @@
+
+/*
+A Special Keyboard 
+
+(easy)
+first we store the character count by using the hashmap
+and then we do the calc on the s2 
+
+*/
+
+class Solution {
+    static int findTime(String S1 , String S2) {
+        // code here
+        HashMap<Character,Integer> map=new HashMap<>();
+        int count=0;
+        int ans=0;
+        
+        for(char c : S1.toCharArray())
+        {
+            map.put(c,count++);
+        }
+        // System.out.println(map);
+        
+        int index1=0;//.get(s2.charAt(0));
+        int index2=0;
+        
+        for(char c: S2.toCharArray())
+        {
+            index2=map.get(c);
+            ans=ans+Math.abs(index2-index1);
+            index1=index2;
+        }
+        return ans;
+    }
+};
