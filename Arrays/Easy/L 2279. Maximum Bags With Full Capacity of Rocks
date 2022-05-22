@@ -1,0 +1,43 @@
+/*
+2279. Maximum Bags With Full Capacity of Rocks
+
+algo
+1. first take the temp array that store the needed rock to fill by taking the difference b/w 
+    temp[]=capacity[]-rocks[]
+2.then sort the temp 
+and take the temp values increment the counter and check whether it reach the additionalrocks
+at last increment the count that has 0 value in temp[]
+
+*/
+
+
+class Solution {
+    public int maximumBags(int[] capacity, int[] rocks, int additionalRocks) {
+        int len=capacity.length;
+        int res[]=new int[len];
+        for(int i=0;i<len;i++)
+        {
+            res[i]=capacity[i]-rocks[i];
+        }
+        Arrays.sort(res);
+        // System.out.println(Arrays.toString(res));
+        int count=0,sum=0;
+        for(int i:res)
+        {
+            if(i!=0)
+            {
+                if(sum + i > additionalRocks )
+                {
+                    return count;
+                }
+                count++;
+                sum+=i;
+            }
+            else
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+}
