@@ -1,0 +1,47 @@
+
+/*
+Find an Replace in String 
+
+1.take substring concept to solve  this 
+2.take a empty stringbuilder which is a result then 
+3.compare the given substring and substring we got from the given string 
+4 .if it is equal then add the target val and also add the intermediate value b/w the index[]
+*/
+
+class Solution {
+    static String findAndReplace(String s, int Q, int[] index, String[] sources, String[] targets) {
+        // code here
+        // StringBuilder ans=new StringBuilder();
+        // ans.append(S.substring(0,index[0]));
+        // for(int i=0;i<Q;i++)
+        // {
+        //     int len=sources[i].length();
+        //     String temp=S.substring(index[i],index[i]+len);
+        //     // System.out.println(temp);
+        //     if(temp.equals(sources[i]))
+        //         ans.append(targets[i]);
+        //     else
+        //         ans.append(temp);
+        //     System.out.println(ans);
+        //     if(i!=Q-1)
+        //     {
+        //         ans.append(S.substring(index[i]+len-1,index[i+1]));
+        //     }
+        //     System.out.println(ans);
+        // }
+        // return ans.toString();
+        //   static String findAndReplace(String s, int Q, int[] index, String[] sources, String[] targets) {
+        String ans="";
+        int last=0;
+        for(int i=0;i<Q;i++){
+            ans+=s.substring(last,index[i]);
+            last=index[i];
+            
+            if(sources[i].equals(s.substring(index[i],index[i]+sources[i].length()))){
+                ans+=targets[i];
+                last+=sources[i].length();
+            }
+        }ans+=s.substring(last);
+        return ans;
+    }
+    }
