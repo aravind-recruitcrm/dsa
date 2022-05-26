@@ -1,0 +1,38 @@
+/*
+
+496. Next Greater Element I
+
+
+Approach:
+The idea here is to create a map which will have the mapping of each element from the bigger array (nums2[]) and its corresponding greater element. In order to do that we are using a monotone stack in increasing order (top element is smaller than the element below in the stack).
+
+Algorithm:
+We iterate through nums2[] and push each element into a stack.
+If the current element in the iteration is greater than the top most element in the stack, then we pop it out and add the popped out element as key and the current element as the value (next greater number).
+We repeat this process as long as the current element is greater than the top most element in the stack or the stack is empty.
+The current element is also added to the stack.
+The last element in the nums2[] will not have a next element. Hence we are not adding that to the map.
+Similarly if there are elements in the stack which does not have a next greater element, remains in the stack and is not moved to the map as the requirement for these elements is to default it to -1, which is being taken care while fetching values from the map.
+
+*/
+
+class Solution {
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        Stack<Integer> s=new Stack();
+      
+        HashMap<Integer,Integer> map=new HashMap();
+        for(int i: nums2)
+        {
+            while( !s.isEmpty() && i > s.peek())
+                map.put(s.pop(),i);
+            s.push(i);
+        }
+        
+        for(int i=0;i < nums1.length;i++)
+        {
+        nums1[i]=map.getOrDefault(nums1[i],-1);
+        }
+        return nums1;
+        
+    }
+}
