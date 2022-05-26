@@ -1,0 +1,34 @@
+/*
+844. Backspace String Compare
+
+algo:
+- just take a fun that takes a string input and 
+-inside take a stack a
+- if the character is # then check the stack is not empty then pop the element 
+- if the character is alphabet then push into the stack
+
+*/
+class Solution {
+    public boolean backspaceCompare(String s, String t) {
+        return fun(s).equals(fun(t));
+    }
+     public String fun(String s)
+    {
+        StringBuilder res=new StringBuilder();
+        Stack<Character> st=new Stack();
+        for(char c: s.toCharArray())
+        {
+            if(c=='#' )
+            {
+                if(!st.isEmpty())
+                    st.pop();
+            }
+            else
+                st.push(c);
+        }
+    
+         while(!st.isEmpty())
+             res.append(st.pop());
+        return res.toString();
+    }
+}
