@@ -1,0 +1,33 @@
+/*
+Stirng imp qns
+22. Generate Parentheses
+
+algo:
+we should use the include and not include method by tracking the noof opening "(" and noof closing ")" for a string 
+if we see the noof opening == noof closing== n then add the string into the solution 
+and repeate the process 
+if we reach noof opening ==n then return from the present state
+we should not include closing ")" without its opening "("
+*/
+
+class Solution {
+    public List<String> generateParenthesis(int n) {
+        ArrayList<String> res=new ArrayList<>() ;
+        // String s=new StringBuilder();
+        fun(n,"",res,0,0);
+        return res;
+    }
+    public List<String> fun(int n,String s,ArrayList<String> res,int open,int close)
+    {
+        if(open> n || open < close )
+            return res;
+        if(open==n && close==n)
+        {
+            res.add(s);
+            return res;
+        }
+        fun(n,s+'(',res,open+1,close);
+        fun(n,s+')',res,open,close+1);
+        return res;
+    }
+}
