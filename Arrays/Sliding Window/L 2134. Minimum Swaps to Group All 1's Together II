@@ -1,0 +1,44 @@
+
+/*2134. Minimum Swaps to Group All 1's Together II
+
+algo:
+
+SLIDING WINDOW  
+
+1.first we count the noof 1s in the array and make that as the window size using the sliding window 
+2.iterate to the count and store the noof 0s and store in the min varable
+3.and iterate from count to length+count  and do sliding window concept  and store the min(noof 0s)
+4.return min value
+
+*/
+class Solution {
+    public int minSwaps(int[] nums) {
+        
+        
+        int count=0;
+        for(int i=0;i<nums.length;i++)
+        {
+            if(nums[i]==1) count++;
+        }
+        int min=0;
+        int sum=0;
+        
+        for(int i=0;i<count;i++)
+        {
+            if(nums[i]==0)
+                sum++;
+        }
+        
+        min=sum;
+        for(int i=count;i<nums.length+count;i++)
+        {
+            if(nums[i-count]==0)
+                sum--;
+            if(nums[i%nums.length]==0)
+                sum++;
+
+            min=Math.min(min,sum);
+        }
+        return min;
+    }
+}
