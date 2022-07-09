@@ -1,0 +1,109 @@
+/*994. Rotting Oranges
+
+->
+first we push all rotten ele into the queue
+and we count the noof  total oranges(total);
+and then we use the -1  as pointer to track the time in the queue
+->
+then we pop a ele from the queue and check whether it is -1 or not  and decrement the totoal
+if it is -1 then we increment the counter that is the ans and we again push -1 into the queue
+if it is an ele then we check 4 sides are visited or not if they are not visited then push them into the queue
+repeat the step until we reached the size of queue as 1
+->
+then check that total oranges is equal to 0 that means all the oranges are rotten then return the count var
+if not then return -1 that means some are not able to rotten
+
+*/
+
+class pair
+{
+    int i,j;
+    pair(int i,int j)
+    {
+      this.i=i;
+      this.j=j;
+    }
+}
+
+class Solution {
+    int count=0,total;
+    Queue<pair> q=new LinkedList<pair>();
+    boolean visited[][];
+    
+    public int orangesRotting(int[][] grid) {
+        visited=new boolean[grid.length][grid[0].length];
+        
+        // int total=0;
+        for(int i=0;i<grid.length;i++)
+        {
+            for(int j=0;j<grid[0].length;j++)
+            {
+                if(grid[i][j]==2)
+                {
+                    
+                  q.add(new pair(i,j));
+                  visited[i][j]=true;
+                }
+                if(grid[i][j]!=0)
+                    total++;
+                
+            }
+        }
+        
+        q.add(new pair(-1,-1));
+        fun(grid);
+        
+        
+        
+        if(total==0)
+            return count;
+        
+        
+        return -1;
+    }
+    public void fun(int grid[][])
+    {
+        
+        while(q.size()!=1)
+        {
+            
+            pair node=q.poll();
+            
+            int x=node.i;
+            if(x==-1){
+                count++;
+                q.add(new pair(-1,-1));
+                continue;
+            }
+            total--;
+            int y=node.j;
+            int m=grid.length;
+            int n=grid[0].length;
+            
+            if((x<m-1)&&(visited[x+1][y]==false)&&(grid[x+1][y]!=0))
+            {
+                visited[x+1][y]=true;
+                q.add(new pair(x+1,y));
+                
+            }
+            
+              if((y<n-1)&&(visited[x][y+1]==false)&&(grid[x][y+1]!=0))
+            {
+                visited[x][y+1]=true;
+                q.add(new pair(x,y+1));
+            }
+              if((x>=1)&&(visited[x-1][y]==false)&&(grid[x-1][y]!=0))
+            {
+                visited[x-1][y]=true;
+                q.add(new pair(x-1,y));
+            }
+            if((y>=1)&&(visited[x][y-1]==false)&&(grid[x][y-1]!=0))
+            {
+                visited[x][y-1]=true;
+                q.add(new pair(x,y-1));
+            }
+            
+        }
+        
+    }
+}
