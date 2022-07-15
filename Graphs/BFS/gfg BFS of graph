@@ -1,0 +1,51 @@
+
+/*
+ gfg BFS of graph
+ 
+ https://practice.geeksforgeeks.org/problems/bfs-traversal-of-graph/1/
+ 
+ use the queue concept to traversal 
+ 
+ algo :
+ first travel to all nodes
+  in which insert the node into queue and traversal to that node 
+ 
+*/
+
+class Solution {
+    // Function to return Breadth First Traversal of given graph.
+    public ArrayList<Integer> bfsOfGraph(int V, ArrayList<ArrayList<Integer>> adj) {
+        // Code here
+        boolean visited[]=new boolean[V];
+        ArrayList<Integer> ans=new ArrayList<>();
+        
+        
+        for(int i=0;i<V;i++)
+        {
+            if(!visited[i])
+            {
+                Queue<Integer> q=new LinkedList<>();
+                
+                q.add(i);
+                visited[i]=true;
+                while(!q.isEmpty())
+                {
+                    int ele=q.poll();
+                    visited[ele]=true;
+                    ans.add(ele);
+                    for(Integer it:adj.get(i))
+                    {
+                            if(visited[it]==false)
+                            {
+                                visited[it]=true;
+                              q.add(it);  
+                            
+                            }
+                    }
+                }
+            }
+        }
+        
+        return ans;
+    }
+}
