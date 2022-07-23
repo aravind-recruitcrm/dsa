@@ -1,0 +1,58 @@
+/* 
+2349. Design a Number Container System
+
+
+we used the two hashmap
+1 .hashmap<int,int > to store the index,number
+2.hashmap <int ,treeset>  to store the  number and set of index in oreder 
+
+
+
+*/
+
+class NumberContainers {
+
+    HashMap<Integer,Integer> map1;
+    HashMap<Integer,TreeSet<Integer>> map2;
+   
+    
+    public NumberContainers() {
+        map1=new HashMap();
+        map2=new HashMap();
+    }
+    
+    public void change(int index, int number) {
+        if(!map1.containsKey(index))
+        {
+            map1.put(index,number);
+        
+        }
+        else
+        {
+            int val=map1.get(index);
+            map1.put(index,number);
+            TreeSet<Integer> set=map2.get(val);
+            set.remove(index);
+            if(set.size()==0)
+                map2.remove(val);
+            
+        }
+        if(map2.containsKey(number))
+        {
+            map2.get(number).add(index);
+        }
+        else
+        {
+            TreeSet<Integer> set=new TreeSet<Integer>();
+            set.add(index);
+            map2.put(number,set);
+        }
+    }
+    
+    public int find(int number) {
+        
+         return map2.containsKey(number) ? map2.get(number).first() : -1;
+         
+        
+    }
+}
