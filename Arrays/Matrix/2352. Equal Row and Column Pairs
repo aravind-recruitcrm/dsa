@@ -1,0 +1,47 @@
+/*
+2352. Equal Row and Column Pairs
+
+we use the string seperated by any specific keyword and store the row value as the key value pair (key is string , value is the count for that string) into the hashmap
+and again we travel to the column valus and make them as string and search them in the map 
+
+https://assets.leetcode.com/uploads/2022/06/01/ex2.jpg  
+    {
+    store as 
+    {3 1 2 2 =1, 1 4 4 5 =1, 2 4 2 2 =2}
+
+    }
+
+*/
+
+class Solution {
+    public int equalPairs(int[][] grid) {
+        int count=0;
+        HashMap<String,Integer> map=new HashMap<>();
+        for(int i=0;i<grid.length;i++)
+        {
+            StringBuilder st=new StringBuilder();
+            for(int j=0;j<grid.length;j++)
+            {
+                st.append(grid[i][j]+" ");
+            }
+            map.put(st.toString(),map.getOrDefault(st.toString(),0)+1);
+        }
+        System.out.println(map);
+        
+        for(int i=0;i<grid.length;i++)
+        {
+            StringBuilder st1=new StringBuilder();
+            for(int j=0;j<grid.length;j++)
+            {
+                st1.append(grid[j][i]+" ");
+            }
+            int val=map.getOrDefault(st1.toString(),0);
+            if(val!=0)
+                count+=val;
+            
+
+        }
+                
+        return count;
+    }
+}
