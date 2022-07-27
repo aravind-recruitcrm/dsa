@@ -1,0 +1,45 @@
+
+/* 
+ Gfg Maximum Index
+ 
+ logic:
+ - take the prefix value that store the min value from left to right;
+ - then travel the original array and prefix min value array
+ - if the prefix ele value is less the present value then through the prefix array until we find the first least value 
+ - in this store the min valueof j-i 
+ 
+*/
+class Solution{
+    
+    // A[]: input array
+    // N: size of array
+    // Function to find the maximum index difference.
+    static int maxIndexDiff(int A[], int N) { 
+        
+        int max=Integer.MIN_VALUE;
+        int prefix[]=new int[N];
+        prefix[0]=A[0];
+        for(int i=1;i<N;i++)
+        {
+            prefix[i]=Math.min(prefix[i-1],A[i]);
+        }
+        
+        int i=N-1,j=N-1;
+        while(i>=0 && j>=0)
+        {
+            if(A[j] >= prefix[i])
+            {
+                max=Math.max(max,j-i);
+                i--;
+            }
+            else
+            {
+                j--;
+            }
+        }
+        return max;
+        
+    }
+}
+
+
