@@ -1,0 +1,39 @@
+/*
+1476. Subrectangle Queries
+
+
+Logic:
+
+-- dont use n2
+-- we need to store latest modified range of rows and columns into the arrayList<int[]> 
+-- then if they ask for the specific row and column check whether it exists in the arrayList if they exist then print it 
+-- else return from the mat grid;
+*/
+
+class SubrectangleQueries {
+    int mat[][];
+    ArrayList<int[]> res=new ArrayList<>();
+    
+    public SubrectangleQueries(int[][] rectangle) {
+        mat=rectangle;
+    }
+    
+    public void updateSubrectangle(int row1, int col1, int row2, int col2, int newValue) {
+        
+        int ans[]={row1,row2,col1,col2,newValue};
+        res.add(ans);
+        
+        
+    }
+    
+    public int getValue(int row, int col) {
+        for(int i=res.size()-1;i>=0;i--)
+        {
+            int ans[]=res.get(i);
+            if(ans[0]<=row&& row<=ans[1]&& ans[2]<=col&& col<=ans[3])
+                return  ans[4];
+        }
+        return mat[row][col];
+    }
+}
+
