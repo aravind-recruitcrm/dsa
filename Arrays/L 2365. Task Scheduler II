@@ -1,0 +1,47 @@
+/*
+2365. Task Scheduler II
+
+logic:
+use map to store the previous value days
+
+1.check if that task is new that means map is not contains that value then insert the value in map and increment the days counter
+2.
+if value is already exists then 
+    check it is contains required gap between them 
+    if gap is ok then store and increment the counter
+    if gap is not ok then increment the required gap
+
+
+*/
+
+
+class Solution {
+    public long taskSchedulerII(int[] tasks, int space) {
+        long days=0;
+        HashMap<Integer,Long> map=new HashMap();
+        
+        for(int i=0;i<tasks.length;i++)
+        {
+            if(!map.containsKey(tasks[i]))
+            {
+                days++;
+               
+            }
+            else
+            {
+                if(days>=space+map.get(tasks[i]))
+                {
+                    days++;                    
+                }
+                else
+                {
+                    days=map.get(tasks[i])+space+1;
+                }
+            }
+             map.put(tasks[i],days);
+            
+        }
+        return days;
+        
+    }
+}
