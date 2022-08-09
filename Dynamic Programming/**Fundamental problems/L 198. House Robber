@@ -1,0 +1,88 @@
+//https://www.youtube.com/watch?v=GrMBfJNk_NY&list=PLgUwDviBIf0qUlt5H_kiKYaNSqJ81PMMY&index=6
+
+//198. House Robber
+
+
+class Solution {
+        public static int dp[];
+
+    public int rob(int[] nums) {
+               dp=new int[nums.length];
+        dp[0]=nums[0];
+        Arrays.fill(dp,-1);
+    return fun(nums,nums.length-1);
+    }
+       public static int fun(int nums[],int n)
+    {
+
+        if(n <0)
+            return 0;
+         if(dp[n]!=-1)
+             return dp[n];
+        int include =nums[n]+fun(nums,n-2);
+        int notInclude=0+fun(nums,n-1);
+        return dp[n]=Math.max(include,notInclude);
+        
+    }
+}
+
+
+// using recurssion
+
+// import java.util.*;
+// public class Solution {
+//     public static int maximumNonAdjacentSum(ArrayList<Integer> nums) {
+//         return fun(nums,nums.size()-1);
+//     }
+//     public static int fun(ArrayList<Integer> nums,int n)
+//     {
+//         if(n==0)
+//             return nums.get(0);
+//         if(n <0)
+//             return 0;
+//         int include =nums.get(n)+fun(nums,n-2);
+//         int notInclude=0+fun(nums,n-1);
+//         return Math.max(include,notInclude);
+        
+//     }
+// }
+
+// using tabulation with memory space
+
+// import java.util.*;
+// class TUF{
+// static int solveUtil(int n, int[] arr, int[] dp){
+    
+//     dp[0]= arr[0];
+    
+//     for(int i=1 ;i<n; i++){
+//         int pick = arr[i];
+//         if(i>1)
+//             pick += dp[i-2];
+//         int nonPick = 0+ dp[i-1];
+        
+//         dp[i]= Math.max(pick, nonPick);
+//     }
+    
+    
+//     return dp[n-1];
+// }
+
+// static int solve(int n, int[] arr){
+//     int dp[]=new int[n];
+//     Arrays.fill(dp,-1);
+//     return solveUtil(n, arr, dp);
+// }
+
+
+// public static void main(String args[]) {
+
+//   int arr[]={2,1,4,9};
+//   int n=arr.length;
+//   System.out.println(solve(n,arr));
+// }
+// }
+
+
+
+
