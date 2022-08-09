@@ -1,0 +1,73 @@
+// 509. Fibonacci Number
+
+
+
+// using normal recc
+
+// class Solution {
+//     int dp[];
+//     public int fib(int n) {
+//         // dp=new int[n+1];
+//          return fun(n);
+//     }
+    
+//     public int fun( int n)
+//     {
+//         if(n <2 )
+//             return n;
+//         int left=fun(n-1);
+//         int right=fun(n-2);
+//         return left+right;
+//     }
+// }
+
+
+// using rec+Memization  
+
+// class Solution {
+//     int dp[];
+//     public int fib(int n) {
+//         if(n< 2)
+//             return n; 
+//         dp=new int[n+1];
+//         Arrays.fill(dp,-1);
+//         dp[0]=0;
+//         dp[1]=1;
+//         return  fun(n);
+//         }
+//     public int fun(int n)
+//     {
+//         if(dp[n]!=-1)
+//             return dp[n];
+//         // int left,right;
+//           int left=dp[n-1]!=-1 ? dp[n-1]:fun(n-1);
+//           int right=dp[n-2]!=-1 ? dp[n-2] : fun(n-2)  ;
+//         // System.out.println(left+" "+right+" "+ n);
+//         return dp[n]=left+right;
+//     }
+// }
+
+// /*
+// using dp and tabulation without usin extra space
+
+class Solution {
+    public int fib(int n) {
+        if(n < 2)
+            return n;// if n is less than 2 then print that n only
+        int prev=1;
+        int prev2=0;
+        int cur=0;// we use the technique of earthworm and solve this problem
+        for(int i=2;i<=n;i++)
+        {
+           cur=prev+prev2;
+            prev2=prev;
+            prev=cur;
+        }
+        return cur;
+        
+    }
+}
+
+
+
+
