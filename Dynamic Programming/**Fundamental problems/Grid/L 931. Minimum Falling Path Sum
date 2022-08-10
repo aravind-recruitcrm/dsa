@@ -1,0 +1,41 @@
+/*931. Minimum Falling Path Sum(multiple source to multiple destination with minimum path among all the paths)
+(see striver video)
+logic:(reccursion and memoization)
+we take one final destination(from last row) and we use recurssion and memoization to store and reach any starting point (from first row)
+ 
+ we change the destination and find for that and find the minimum value among all the destinations paths to the starting paths
+
+
+*/
+class Solution {
+    int dp[][];
+    int row,col;
+    public int minFallingPathSum(int[][] matrix) {
+        row =matrix.length;
+        col=matrix[0].length;
+        dp=new int[row][col];
+        int min=Integer.MAX_VALUE;
+        
+        for(int i=0;i<row;i++){
+            min=Math.min(min,fun(matrix,row-1,i));
+            
+        }
+        return min;
+        
+    }
+    public int fun(int[][] matrix,int i,int j)
+    {
+        if(i<0 || i>row-1 || j<0 || j>col-1)
+            return Integer.MAX_VALUE;
+        if(i==0)
+            return matrix[i][j];
+        if(dp[i][j]!=0)
+            return dp[i][j];
+        
+        int leftdig=fun(matrix,i-1,j-1);
+        int rightdig=fun(matrix,i-1,j+1);
+        int stright=fun(matrix,i-1,j);
+        
+        return dp[i][j]=Math.min(Math.min(leftdig,rightdig),stright)+matrix[i][j];
+    }
+}
