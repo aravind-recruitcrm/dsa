@@ -1,0 +1,55 @@
+/*
+1143. Longest Common Subsequence
+
+https://www.youtube.com/watch?v=NPZn9jBrX8U&list=PLgUwDviBIf0qUlt5H_kiKYaNSqJ81PMMY&index=26
+*/
+
+class Solution {
+    public int longestCommonSubsequence(String t1, String t2) {
+        
+        int[][] dp=new int[t1.length()+1][t2.length()+1];
+        for(int i=0;i<=t1.length();i++)
+            dp[i][0]=0;
+        for(int i=0;i<=t2.length();i++)
+            dp[0][i]=0;
+        
+        for(int i=1;i<=t1.length();i++){
+            for(int j=1;j<=t2.length();j++){
+                if(t1.charAt(i-1)==t2.charAt(j-1)) dp[i][j]=1+dp[i-1][j-1];
+                else
+                    dp[i][j]=Math.max(dp[i-1][j],dp[i][j-1]);
+            }
+                
+        }
+        return dp[t1.length()][t2.length()];
+        
+    }
+}
+
+/*
+
+//using recurssion +memoization
+
+class Solution {
+    int dp[][];
+    public int longestCommonSubsequence(String text1, String text2) {
+        dp=new int[text1.length()][text2.length()];
+        return lcs(text1,text2,text1.length()-1,text2.length()-1);
+    }
+    
+    public int lcs(String t1,String t2,int i,int j ){
+       
+        if(i<0 || j< 0)
+           return 0;
+        if(dp[i][j]!=0)
+            return dp[i][j];
+        if(t1.charAt(i)==t2.charAt(j)) return 1+lcs(t1,t2,i-1,j-1);
+        
+        int left=lcs(t1,t2,i-1,j);
+        int right=lcs(t1,t2,i,j-1);
+        
+        return dp[i][j]=Math.max(left,right);
+        
+    }
+    
+}*/
