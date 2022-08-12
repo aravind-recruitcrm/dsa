@@ -1,0 +1,29 @@
+/*
+Number Of Subsets(code studio)
+
+https://www.youtube.com/watch?v=ZHyb-A2Mte4&list=PLgUwDviBIf0qUlt5H_kiKYaNSqJ81PMMY&index=18
+*/
+
+public class Solution {
+    public static int[][] dp;
+    public static int findWays(int num[], int tar) {
+        // Write your code here..
+        dp=new int[num.length][tar+1];
+        return fun(num,tar,num.length-1);
+        
+    }
+    public static int fun(int[] num,int target,int index){
+        if(target==0)
+            return 1;
+        if(dp[index][target]!=0) return dp[index][target];
+        if(index==0)
+            return num[0]==target?1:0;
+        
+        int notInclude =fun(num,target,index-1);
+        int include =0;
+        if(num[index]<=target)
+            include=fun(num,target-num[index],index-1);
+        
+        return dp[index][target]=include+notInclude;
+    }
+}
