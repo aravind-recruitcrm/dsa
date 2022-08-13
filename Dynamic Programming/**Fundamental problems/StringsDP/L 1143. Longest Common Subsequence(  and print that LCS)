@@ -1,7 +1,8 @@
 /*
-1143. Longest Common Subsequence
+1143. Longest Common Subsequence ( and also it has print LCS ) 
 
 https://www.youtube.com/watch?v=NPZn9jBrX8U&list=PLgUwDviBIf0qUlt5H_kiKYaNSqJ81PMMY&index=26
+
 */
 
 class Solution {
@@ -21,6 +22,24 @@ class Solution {
             }
                 
         }
+        
+        // print Lcs(not in question but important)
+        StringBuilder ans=new StringBuilder();
+        int i=t1.length(),j=t2.length();
+        
+        while(i>0 && j>0){
+            
+            if(t1.charAt(i-1)==t2.charAt(j-1)){
+                ans.append(t1.charAt(i-1));
+                i--;
+                j--;    
+            }
+            else if(dp[i-1][j] > dp[i][j-1]) i--;
+            else j--;
+        }
+        ans.reverse().toString();
+        System.out.println(ans);
+        
         return dp[t1.length()][t2.length()];
         
     }
