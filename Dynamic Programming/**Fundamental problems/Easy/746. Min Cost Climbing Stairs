@@ -1,0 +1,28 @@
+/*
+746. Min Cost Climbing Stairs
+
+*/
+
+class Solution {
+    int dp[];
+    public int minCostClimbingStairs(int[] cost) {
+        dp=new int[cost.length+1];
+        Arrays.fill(dp,-1);
+         return Math.min(fun(cost,0),fun(cost,1));
+    }
+    public int fun(int[] cost,int pos){
+        if(pos>cost.length-1)
+            return 0;
+        if(dp[pos]!=-1) return dp[pos];
+        
+        int step1=Integer.MAX_VALUE;
+        int step2=Integer.MAX_VALUE;
+        step1=cost[pos]+fun(cost,pos+1);
+        step2=cost[pos]+fun(cost,pos+2);
+        
+        return dp[pos]=Math.min(step1,step2);
+
+    }
+}
+
+
