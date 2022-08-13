@@ -1,0 +1,32 @@
+
+
+/*
+1312. Minimum Insertion Steps to Make a String Palindrome(same as maximum insertions to make palindrome)
+
+https://www.youtube.com/watch?v=xPBLEj41rFU&list=PLgUwDviBIf0qUlt5H_kiKYaNSqJ81PMMY&index=30
+
+*/
+
+class Solution {
+    public int minInsertions(String s) {
+        StringBuilder sb=new StringBuilder();
+        sb.append(s);
+        String rev=sb.reverse().toString();
+         return s.length()-fun(s,rev);
+    }
+    
+    public int fun(String s,String rev){
+        int len=s.length();
+        int dp[][]=new int[len+1][len+1];
+        
+        for(int i=1;i<=len;i++){
+            for(int j=1;j<=len;j++){
+                if(s.charAt(i-1)==rev.charAt(j-1)) 
+                    dp[i][j]=1+dp[i-1][j-1];
+                else
+                    dp[i][j]=Math.max(dp[i][j-1],dp[i-1][j]);
+            }
+        }
+        return dp[len][len];
+    }
+}
