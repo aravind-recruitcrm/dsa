@@ -1,0 +1,46 @@
+/*
+
+Minimum Operations
+
+check wether it is even or odd 
+if even that means use divide by 2;
+if odd then use minus 1;
+*/
+class Solution
+{
+    int dp[];
+    public int minOperation(int n)
+    {
+        //code here.
+        // if(n==0)
+        // return n;
+        // dp=new int[n+1];
+        // Arrays.fill(dp,-1);
+        //  return fun(n);
+        
+         if(n==0)
+        return 0;
+        if(n%2==0)
+        {
+            return 1+minOperation(n/2);
+        }
+        else
+        {
+            return 1+minOperation(n-1);
+        }
+    }
+    
+    // public int fun(int n){
+    //     if(n==0) return 0;
+        
+    //     if(dp[n]!=-1) return dp[n];
+    //     if(n%2!=0)
+    //     {
+    //         return dp[n]=1+fun(n-1);
+    //     }
+    //     int left=fun(n-1);
+    //     int right=fun(n/2);
+    //     // System.out.println(left+"  "+right);
+    //     return dp[n]=Math.min(left,right)+1;
+        
+    }
