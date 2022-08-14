@@ -1,0 +1,55 @@
+/*
+Came for micron
+
+
+rat problem
+explination:
+rat is at top right it should travel and collect maximum  and condition is it should only two left turns and reach last column 
+*/
+
+import java.util.*;
+public class MyClass {
+    
+    public static int fun(int[][] mat,int i,int j,int val){
+        
+        if(i<0|| j<0|| i>2||j>2 || val<0){
+            return 0;
+        }
+        
+        int down=Integer.MIN_VALUE;
+        int left=Integer.MIN_VALUE;
+        int right=Integer.MIN_VALUE;
+
+
+        if(val==2){
+        left=fun(mat,i,j-1,val);
+        down=fun(mat,i+1,j,val-1);
+        }
+        else if(val==1){
+        down=fun(mat,i+1,j,val);
+        right=fun(mat,i,j+1,val-1);
+
+        }
+        else{
+         right=fun(mat,i,j+1,val);
+
+        }
+    
+        
+        int res=Math.max(Math.max(left,right),down)+mat[i][j];
+        System.out.println(i+" "+j+" "+left+" "+down+" "+right);
+        return res;
+    }
+    
+    public static void main(String args[]) {
+        int mat[][]=new int[3][3];
+        mat[0]=new int[]{3,7,4};
+        mat[1]=new int[]{4,16,10};
+        mat[2]=new int[]{5,23,17};
+        // mat[3]=new int[]{4,5,6};
+        System.out.println(Arrays.deepToString(mat));
+        System.out.println(fun(mat,0,2,2));
+        
+        
+    }
+}
