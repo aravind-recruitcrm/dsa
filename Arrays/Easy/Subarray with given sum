@@ -1,0 +1,38 @@
+
+/*
+Subarray with given sum
+
+use two pointers where j increases when sum of num are less than required sum 
+i pointer increase when the sum is greater than the required sum then we increase the i pointer until we get the sum is less than the required sum
+*/
+class Solution
+{
+    //Function to find a continuous sub-array which adds up to a given number.
+    static ArrayList<Integer> subarraySum(int[] arr, int n, int s) 
+    {
+        // Your code here
+        ArrayList<Integer> arrr=new ArrayList<>();
+         int sum=0;
+         int i=0,j=0;
+         while(true){
+             if(sum<s && j<n) {
+                 sum+=arr[j];
+                 j++;
+             }
+             else if(sum>s){
+                 sum-=arr[i];
+                 i++;
+             }
+             else break;
+        }
+        if(sum==s && sum!=0){
+            arrr.add(i+1);
+            arrr.add(j);
+ 
+        }
+         else arrr.add(-1);
+         
+
+         return arrr;
+    }
+}
