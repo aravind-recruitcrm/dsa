@@ -1,0 +1,38 @@
+
+/*
+Trapping Rain Water
+logic:
+we take maxarray from left to right and right to left;
+and we take minimum of both lefttoright and righttoleft and substract from the arr[i] and add the value to the count
+
+*/
+
+class Solution{
+    
+    // arr: input array
+    // n: size of array
+    // Function to find the trapped water between the blocks.
+    static long trappingWater(int arr[], int n) { 
+        // Your code here
+        long ans=0;
+        
+        int arrlr[]=new int[n];
+        int arrrl[]=new int[n];
+        int max=Integer.MIN_VALUE;
+        for(int i=0;i<n;i++){
+            max=Math.max(max,arr[i]);
+            arrlr[i]=max;
+        }
+        
+        max=Integer.MIN_VALUE;
+        for(int i=n-1;i>=0;i--){
+            max=Math.max(max,arr[i]);
+            arrrl[i]=max;
+        }
+        
+        for(int i=0;i<n;i++){
+            ans+=Math.min(arrrl[i],arrlr[i])-arr[i];
+        }
+        return ans;
+    } 
+}
