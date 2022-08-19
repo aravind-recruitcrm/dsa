@@ -1,0 +1,34 @@
+
+// Implement Atoi
+// by using the unic code value and travesing from right and multipling 10 values
+
+class Solution
+{
+    int atoi(String str) {
+        boolean f=false;
+        if(str.charAt(0)=='-')
+        f=true;
+        int len=str.length()-1;
+        
+        int  i=len;
+        int sum=0;
+        int m=1;
+        int limit=0;
+        if(f)
+        limit=1;
+        
+        while(i>=limit){
+            int  c=str.charAt(i)-'0';
+            if( c<0 ||c>9)
+            return -1;
+            System.out.println(sum);
+            sum+=c*m;
+            i--;
+            m=m*10;
+            
+        }
+        if(f)
+        return 0-sum;
+        return sum;
+    }
+}
