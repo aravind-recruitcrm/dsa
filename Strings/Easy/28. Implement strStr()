@@ -1,0 +1,19 @@
+//28. Implement strStr()
+
+
+class Solution {
+    public int strStr(String s, String x) {
+        if(s.equals(x)) return 0;
+    //   if(s.length()> x.length())
+    //   return -1;
+       if(!s.contains(x))
+       return -1;
+    //   return 0;
+       for(int i=0;i<s.length();i++){
+           if(s.charAt(i)==x.charAt(0) && s.charAt(i+x.length()-1)==x.charAt(x.length()-1) &&(s.substring(i,i+x.length()).equals(x))) 
+           return i;
+       } 
+       return -1;
+        
+    }
+}
