@@ -1,0 +1,48 @@
+//Next Greater Element
+/*
+
+logic: 
+
+traverse from right to left and store the elements in ascending order to stack 
+and while traversing see the top of the stack 
+if top of the stack is greater then take that value 
+if top of the stack is less than present element then remove the stack elements until we get the value greater greater then present element 
+
+
+*/
+
+
+class Solution
+{
+    //Function to find the next greater element for each element of the array.
+    public static long[] nextLargerElement(long[] arr, int n)
+    { 
+        // Your code here
+        if(n==1) return arr;
+        long ans[]=new long[arr.length];
+        ans[n-1]=-1;
+        Stack<Long> st=new Stack<>();
+        st.push(arr[n-1]);
+        for(int i=n-2;i>=0;i--){
+            if(arr[i]<st.peek()){
+                ans[i]=st.peek();
+                st.push(arr[i]);
+                
+            }
+            else{
+                
+                while(!st.isEmpty() && arr[i]>st.peek())
+                 st.pop();
+                 
+                if(st.isEmpty()) ans[i]=-1;
+                else
+                ans[i]=st.peek();
+                st.push(arr[i]);
+                
+            }
+            
+        
+        }
+        return ans;
+    } 
+}
