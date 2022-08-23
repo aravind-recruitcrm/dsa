@@ -1,0 +1,27 @@
+// Parenthesis Checker
+
+class Solution
+{
+
+    static boolean ispar(String x)
+    {
+
+        Stack<Character> st=new Stack<>();
+
+        
+        for(Character c:x.toCharArray()){
+            
+            if(st.size()==0){
+                st.push(c);
+            }
+            else if(st.peek()=='(' && c==')') st.pop();
+            else if(st.peek()=='{' && c=='}') st.pop();
+            else if(st.peek()=='[' && c==']') st.pop();
+            else
+            st.push(c);
+            
+            
+        }
+        return st.isEmpty();
+    }
+}
