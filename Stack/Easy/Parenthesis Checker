@@ -25,3 +25,37 @@ class Solution
         return st.isEmpty();
     }
 }
+
+
+/*
+
+extra  logic:
+
+class Solution
+{
+    //Function to check if brackets are balanced or not.
+    static boolean ispar(String x)
+    {
+        // add your code here
+        HashMap<Character,Character> map=new HashMap<>();
+        Stack<Character> st=new Stack<>();
+        map.put(']','[');
+        map.put('}','{');
+        map.put(')','(');
+        
+        for(Character c:x.toCharArray()){
+            if(!map.containsKey(c))
+            st.push(c);
+            else{
+                if(st.isEmpty() || map.get(c)!=st.peek())
+                return false;
+                st.pop();
+            }
+            
+            // System.out.println(st+" "+map);
+        }
+        return st.isEmpty();
+    }
+}
+
+*/
