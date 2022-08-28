@@ -1,0 +1,27 @@
+//Binary Tree to DLL
+// use the inorder traversal and make the connections
+
+class Solution
+{
+    //Function to convert binary tree to doubly linked list and return it.
+    Node prev=null,head=null;
+    Node bToDLL(Node root)
+    {
+	//  Your code here	
+     fun(root);
+     return head;
+    }
+    
+    void  fun(Node root){
+        if(root==null) return;
+        fun(root.left);
+        if(prev==null) head=root;
+        else{
+            prev.right=root;
+            root.left=prev;
+        }
+        prev=root;
+        fun(root.right);
+        // return head;
+    }
+}
