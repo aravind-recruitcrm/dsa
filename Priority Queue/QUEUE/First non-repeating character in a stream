@@ -1,0 +1,46 @@
+
+/*
+First non-repeating character in a stream
+
+algo:
+-> use the Hashmap (for freq), queue(to store the non repeating characters)
+-> take the character input and check if it is not contains in the hashmap,if not present that means it 
+    is occuring first time then store that in the queue and 
+->after inserting use the queue and retrive the character from queue and check the character is 1 then store in ans
+    else remove the element from queue
+
+*/
+
+class Solution
+{
+    public String FirstNonRepeating(String A)
+    {
+        HashMap<Character,Integer> map=new HashMap<>();
+        Queue<Character> st=new LinkedList<>();
+        String res="";
+        // storing in queue
+        for(Character c:A.toCharArray()){
+            if(!map.containsKey(c)){
+                st.add(c);
+            }
+            // storing in hashmap 
+            map.put(c,map.getOrDefault(c,0)+1);
+            //checking for the ans using queue 
+                    while(true){
+                        if(st.isEmpty()){
+                        res+="#";
+                        break;
+                        }
+                        else if(map.get(st.peek())==1){
+                            res+=st.peek();
+                            break;
+                        }
+                        else{
+                            st.poll();
+                        }
+                }
+            }
+            return res;
+        }
+        
+    }
