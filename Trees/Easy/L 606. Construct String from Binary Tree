@@ -1,0 +1,50 @@
+/*
+606. Construct String from Binary Tree
+
+
+-> we can observe it is a preorder bcz the root,left,right is followed
+-> so before the function call add a "(" to ans and after getting out of funtion call again add ")" to and
+-> follow above step but we need to see some condition is the node may have
+    1.no childs
+    2.only left child 
+    3.only right child
+    4.or have both left and right childs
+    so according to the situation we need to add the "(" or "()(" or ")("
+
+*/
+class Solution {
+    
+    public String tree2str(TreeNode root) {
+     StringBuilder sb=new StringBuilder();
+       
+        fun(root,sb);
+        return sb.toString();
+        
+        
+    }
+    public void fun(TreeNode root,StringBuilder sb){
+         if(root==null) return ;
+        sb.append(root.val);
+        if(root.left==null && root.right==null) return ;
+        
+        else if(root.right==null){
+            sb.append("(");
+            fun(root.left,sb);
+            sb.append(")");
+        }
+        else if(root.left==null){
+            sb.append("()(");
+            fun(root.right,sb);
+            sb.append(")");
+            
+        }
+        else{
+            sb.append("(");
+            fun(root.left,sb);
+            sb.append(")(");
+            fun(root.right,sb);
+            sb.append(")");
+            
+        }
+    }
+}
