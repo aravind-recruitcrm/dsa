@@ -1,0 +1,26 @@
+import java.io.*;
+import java.util.*;
+public class MyClass {
+    public static void main(String args[]) {
+        int num1=2;
+        int num2=20;
+        boolean arr[]=new boolean[num2-num1+1];
+        Arrays.fill(arr,false);
+        // this for loop is travel upto 1-root(n)
+        for(int i=2;i*i<=num2;i++){
+            // this for is used to multiple all multiples as true
+            for(int j=i*2;j<=num2;j+=i){
+                arr[j-num1]=true;
+                
+            }
+        }
+        int sum=0;
+        for(int i=num1;i<num2-1;i++) {
+            if(!arr[i-num1]){
+            System.out.println(arr[i-num1]+" "+(i));
+            sum+=i;
+            }
+        }
+        System.out.println(sum);
+    }
+}
