@@ -1,0 +1,26 @@
+//733. Flood Fill
+//using recurssion
+// traversing all connected same elements and make them as required color 
+
+class Solution {
+    public int[][] floodFill(int[][] image, int sr, int sc, int color) {
+        int len=image.length;
+        int bre=image[0].length;
+        int req=image[sr][sc];
+        if(req==color) return image;
+        fun(image,sr,sc,req,color,len,bre);
+        return image;
+        
+    }
+    
+    public void fun(int[][] image, int i, int j, int req,int color,int len,int bre){
+        if(i<0 || i>=len|| j<0 || j>=bre)
+            return ;
+        if( image[i][j]!=req) return ;
+        image[i][j]=color;
+        fun(image,i,j+1,req,color,len,bre);
+        fun(image,i,j-1,req,color,len,bre);
+        fun(image,i+1,j,req,color,len,bre);
+        fun(image,i-1,j,req,color,len,bre);
+    }
+}
