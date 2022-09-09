@@ -1,0 +1,24 @@
+// Number of paths
+/*
+for noof paths qn 
+we can use 
+(m+n-2)!/(m-1)! * (n-1)!
+
+ 
+*/
+
+class Solution{
+    
+    long numberOfPaths(int m, int n) {
+        long ans=(fact(m-1)*fact(n-1));
+        if(ans==0) return 0;
+        return fact(n+m-2)/ans;
+    }
+    
+    long fact(int n){
+        long ans=1;
+        for(int i=n;i>1;i--) ans*=i;
+        return ans;
+    }
+    
+}
