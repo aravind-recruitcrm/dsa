@@ -1,4 +1,5 @@
 // 1996. The Number of Weak Characters in the Game
+// https://www.youtube.com/watch?v=q0GUGiwSFEE
 
 class Solution {
     public int numberOfWeakCharacters(int[][] properties) {
@@ -25,3 +26,7 @@ class Solution {
         return noOfWeakCharacters;
     }
 }
+
+
+
+4 7     5 10
