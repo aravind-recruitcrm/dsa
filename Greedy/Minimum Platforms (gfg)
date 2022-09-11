@@ -1,0 +1,42 @@
+
+// https://www.youtube.com/watch?v=Ls_AYoz1IX0
+/*
+
+Minimum Platforms
+
+1.first sort the arr,and dep indivually 
+2.take two pointer i for arr,j for dep
+3.traverse until i reach last index
+4.in that time if now arr is takes place then store the max value
+5. if dep is takes place then decrease the variable and increase the pointer for dep
+*/
+
+class Solution
+{
+
+    static int findPlatform(int arr[], int dep[], int n)
+    {
+        
+        Arrays.sort(arr);
+        Arrays.sort(dep);
+        int i=0,j=0;
+        int ans=0;
+        int max=0;
+        while(i<n){
+            // if arr is takes place 
+            if(arr[i]<=dep[j]){
+                ans++;
+                max=Math.max(max,ans);
+                i++;
+            }
+            // if dep is takes place 
+            else{
+                ans--;
+                j++;
+                
+            }
+        }
+        return max;
+    }
+    
+}
