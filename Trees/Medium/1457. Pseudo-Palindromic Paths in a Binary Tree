@@ -1,0 +1,62 @@
+// 1457. Pseudo-Palindromic Paths in a Binary Tree
+
+/*
+(hashmap,tree,rec,)
+-we need to carry a map that store the freq of each element 
+-and when we reach the leaf node we need to check the elements are forming the palindrome (Pseudo-Palindromic) or not 
+
+
+*/
+
+class Solution {
+    int count;
+    HashMap<Integer,Integer> map;
+    public int pseudoPalindromicPaths (TreeNode root) {
+        map = new HashMap<>();
+        // storing the intial root val
+        map.put(root.val, 1);
+        count=0;
+        fun(root);
+        return count;
+        
+    }
+    
+    public void fun(TreeNode root){
+        //base condition
+        if(root.left==null  && root.right==null) {
+            int val = 0; 
+            for(int i : map.values()) {
+                if(i%2 != 0){ 
+                    val++;
+                }
+            }
+            if(val <= 1) count++; 
+            
+            return;
+        }
+
+        if(root.left != null) {
+            map.put(root.left.val, map.getOrDefault(root.left.val, 0)+1);
+            fun(root.left);
+            int ele = map.get(root.left.val)-1;
+            if(ele > 0){
+                map.put(root.left.val, ele);
+            }
+            else{
+                map.remove(root.left.val);
+            }
+        }
+
+        if(root.right != null) {
+            map.put(root.right.val, map.getOrDefault(root.right.val, 0)+1);
+            fun(root.right);
+            int ele = map.get(root.right.val)-1;
+            if(ele > 0) {
+                map.put(root.right.val, ele);
+            }
+            else {
+                map.remove(root.right.val);
+            }
+        } 
+    }
+}
