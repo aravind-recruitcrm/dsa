@@ -1,0 +1,28 @@
+/*
+42. Trapping Rain Water
+
+used max from left to right and right to left and take the min(rtl,ltr) and take the diff of min and height[i]
+*/
+class Solution {
+    public int trap(int[] height) {
+        int ans=0;
+        int rtl[]=new int[height.length];
+        int max=0;
+        // rtl array store the max elements from right to left 
+        for(int i=height.length-1;i>=0;i--){
+            rtl[i]=max;
+            max=Math.max(max,height[i]);
+        }
+        // we traverse from left to right and calculate max elements in 'max' variable and take the min(rtl array,max that store the max ele from left to right ) and calculate the diff and store in ans 
+        max=0;
+        for(int i=0;i<height.length-1;i++){
+            int min=Math.min(rtl[i],max);
+            max=Math.max(max,height[i]);
+            if(min>height[i]) ans+=min-height[i];
+        }
+        
+        
+        return ans;
+        
+    }
+}
