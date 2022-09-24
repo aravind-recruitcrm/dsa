@@ -1,0 +1,47 @@
+
+/*
+Activity Selection
+https://practice.geeksforgeeks.org/problems/activity-selection-1587115620/1
+
+use a 2d array and store the starting val and ending val of a person 
+we need to sort based upon the end of each val but not on start of each val 
+sort end in asc,if ends of two persons are equal then sort the start in asc for them .
+then take the and check  whether its present task start value is greater than previous taks end val 
+
+
+*/
+
+class Solution
+{
+    
+    public static int activitySelection(int start[], int end[], int n)
+    {
+        int count=0;
+        int mat[][]=new int[n][2];
+        
+        for(int i=0;i<n;i++) {
+            
+            mat[i][0]=end[i];
+            mat[i][1]=start[i];
+        }
+        //sorting using comparator
+        Arrays.sort(mat,(int[] a ,int[] b)->{
+            
+            if(a[0]==b[0]) {
+                return a[1]-b[1];
+            }
+            return a[0]-b[0];
+            
+        });
+        // then take the and check  whether its present task start value is greater than previous taks end val 
+        int val=0;
+        for(int i=0;i<n;i++) {
+            
+            if(val<mat[i][1]) {
+                val=mat[i][0];
+                count++;
+            }
+        }
+        return count;
+    }
+}
