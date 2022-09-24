@@ -1,0 +1,38 @@
+/*
+
+113. Path Sum II
+
+*/
+class Solution {
+    public List<List<Integer>> ans=new ArrayList<>();
+    
+    public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
+        List<Integer> ds=new ArrayList<>(); // we can pass in as argument or as global varible but at finally any datastructure  are use call by reference ,other than variable are use call by value
+        
+        fun(root,targetSum,ds);
+        return ans;
+    }
+    
+    public void fun(TreeNode root, int sum,List<Integer> ds) {
+        if(root==null) return ;
+        
+        if(root.left==null && root.right==null) {
+            sum-=root.val;
+            if(sum==0) {
+                ds.add(root.val);
+                
+                ans.add(new ArrayList<>(ds));
+                
+                ds.remove(ds.size()-1);
+            }
+            return ;
+        }
+        
+        ds.add(root.val);
+        fun(root.left,sum-root.val,ds) ;
+
+        fun(root.right,sum-root.val,ds);
+        ds.remove(ds.size()-1);
+        
+    }
+}
