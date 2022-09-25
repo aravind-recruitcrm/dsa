@@ -1,5 +1,18 @@
-https://github.com/AravindBusha/dsa/blob/main/Greedy/Activity%20Selection%20(gfg)
+1.https://github.com/AravindBusha/dsa/blob/main/Greedy/Activity%20Selection%20(gfg)
 
-https://www.youtube.com/watch?v=II6ziNnub1Q&list=PLgUwDviBIf0pmWCl2nepwGDO05a0-7EfJ
+2. https://www.youtube.com/watch?v=II6ziNnub1Q&list=PLgUwDviBIf0pmWCl2nepwGDO05a0-7EfJ
 
-
+ 3.class meetingComparator implements Comparator<meeting>
+    {
+    @Override
+    public int compare (meeting o1, meeting o2)
+    {
+    if (01.end < 02.end)
+    return -1;
+    else if (01.end > 02.end)
+    return 1;
+    else if(o1.pos < 02.pos)
+    return -1;
+    return 1;
+    }
+    }
