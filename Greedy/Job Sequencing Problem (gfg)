@@ -1,0 +1,47 @@
+/*
+Job Sequencing Problem
+https://practice.geeksforgeeks.org/problems/job-sequencing-problem-1587115620/1
+
+youtube.com/watch?v=LjPx4wQaRIs&list=PLgUwDviBIf0pmWCl2nepwGDO05a0-7EfJ&index=9
+
+* first we should sort on the max of profit
+* create a array that tells which day ,which task is executing 
+* we try to allocate the task for its maxdeadling and if it is not avaliable then we allocate for less val 
+
+*/
+class Solution
+{
+    
+    int[] JobScheduling(Job arr[], int n)
+    {
+     
+        Arrays.sort(arr,(a,b)-> (b.profit-a.profit));
+        
+        
+        int maxDeadline=0;
+        for(int i=0;i<n;i++){
+             maxDeadline=Math.max(maxDeadline,arr[i].deadline);
+        }
+        int days[]=new int[maxDeadline+1];
+        Arrays.fill(days,-1);
+        
+        int count=0;
+        int amount=0;
+        
+        for(Job i:arr) {
+            int val=i.deadline;
+            
+            for(int j=val;j>0;j--) {
+                
+                if(days[j]==-1) {
+                    days[j]=i.id;
+                    count++;
+                    amount+=i.profit;
+                    break;
+                }
+            }
+        }
+        return new int[]{count,amount};
+    }
+}
+
