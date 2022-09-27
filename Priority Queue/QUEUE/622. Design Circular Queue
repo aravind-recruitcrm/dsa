@@ -1,0 +1,82 @@
+/*
+622. Design Circular Queue
+https://leetcode.com/problems/design-circular-queue/
+https://www.youtube.com/watch?v=lPL-pmBm04Q
+
+    front(front pointer is incremented when ele are "deleted") -------- rear(rear pointer is incremented when "insertion" of ele are there)
+
+logic:
+    * we use the front for deletion and rear for insertion 
+    * if insertion then we increment the rear pointer , we decrement the front pointer when we deletion one ele from queue
+    * for circular queue we need to follow some extra rules 
+    * we use one variable called as size to track the how many elements are the there in the queue
+    * for insertion we need to check the size is not more than given size , and when we reach the end of the queue we need to insert from first position 
+    * for deletion we need to chech the size is greater than 1 , and delete from front
+    
+*/
+
+
+class MyCircularQueue {
+    int arr[];
+    int rear=-1;
+    int front=-1;
+    
+    
+    int k;
+    int size=0;
+    public MyCircularQueue(int k) {
+        arr=new int[k];
+        Arrays.fill(arr,-1);
+        this.k=k;
+    }
+    
+    public boolean enQueue(int value) {
+        
+        if(size==k) return false;
+        rear=(rear+1)%k;
+        arr[rear]=value;
+        if(size==0) front=0;
+        size++;
+        return true;
+            
+        }
+            
+
+    
+    public boolean deQueue() {
+        if(size==0) return false;
+        arr[front]=-1;
+        if(size==1) {
+            front=-1;
+            rear=-1;
+        }
+        else 
+            front=(front+1)%k;
+        size--;
+        return true;
+        
+        }
+            
+        
+
+    
+    public int Front() {
+        if(size==0) return -1;
+        return arr[front];
+    }
+    
+    public int Rear() {
+        if(size==0) return -1;
+        return arr[rear];
+    }
+    
+    public boolean isEmpty() {
+        if(size==0) return true;
+        return false;
+    }
+    
+    public boolean isFull() {
+        if(size==k) return true;
+        return false;
+    }
+}
