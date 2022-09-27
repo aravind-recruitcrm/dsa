@@ -1,0 +1,66 @@
+/*
+838. Push Dominoes
+
+see the solution which is already provided (Approach #2: Calculate Force [Accepted]);
+
+
+*/
+
+class Solution {
+    public String pushDominoes(String dominoes) {
+        
+        StringBuilder ans=new StringBuilder();
+        
+        int len=dominoes.length();
+        int left[]=new int[len];
+        int right[]=new int [len];
+        
+        int val=0;
+        for(int i=0;i<len;i++) {
+            char ch=dominoes.charAt(i);
+            if(ch=='R') {
+                val=len;
+                right[i]=len;
+                
+            }
+            
+            else if(ch=='L') {
+                val=0;
+            }
+            else {
+                right[i]=val;
+
+            }
+             if(val!=0) val--;
+            
+        }
+      
+        val=0;
+        for(int i=len-1;i>=0;i--) {
+            char ch=dominoes.charAt(i);
+            if(ch=='L') {
+                val=len;
+                left[i]=len;
+                
+            }
+            
+            else if(ch=='R') {
+                val=0;
+            }
+            else {
+                left[i]=val;
+
+            }
+             if(val!=0) val--;
+            
+        }
+
+        for(int i =0;i<len;i++) {
+            if(left[i] < right[i]) ans.append("R");
+            else if(left[i] > right[i]) ans.append("L");
+            else ans.append(".");
+        }
+
+        return ans.toString();
+    }
+}
