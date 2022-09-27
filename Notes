@@ -3,3 +3,5 @@
  
   
 2.  * list is a interface and arraylist is a class so we should create them as ( List<Integer> list=new ArrayList<>() ) or (  for  list of list type = List<List<Integer>> list =new ArrayList<>()  ) 
+
+3.  QUEUE -> front(front pointer is incremented when ele are "deleted") -------- rear(rear pointer is incremented when "insertion" of ele are there)
