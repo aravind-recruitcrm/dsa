@@ -1,0 +1,43 @@
+/*
+1578. Minimum Time to Make Rope Colorful
+
+ using by stacks (but it can do using 1 pointer method that take the minimum ballon among the consigetive same ballons )
+ check the values and pop and pushing to the stack 
+*/
+
+class Pair {
+    Character c;
+    int index;
+    Pair(Character c,int index) {
+        this.c=c;
+        this.index=index;
+    }
+}
+
+class Solution {
+    public int minCost(String colors, int[] neededTime) {
+        int ans=0;
+        Stack<Pair> st=new Stack<>();
+        
+        for(int i=0;i<colors.length();i++) {
+            
+            if(st.isEmpty() || colors.charAt(i)!=st.peek().c) 
+                st.push(new Pair( colors.charAt(i),i));
+            else 
+            {
+                
+                if(neededTime[i]  > neededTime[st.peek().index])  {
+                    
+                    ans+=neededTime[st.pop().index];
+                    st.push(new Pair( colors.charAt(i),i));
+                }
+                else {
+                    
+                    ans+=neededTime[i];
+                }
+            }
+            
+        }
+        return ans;
+    }
+}
