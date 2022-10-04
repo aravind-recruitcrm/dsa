@@ -1,0 +1,45 @@
+/*
+2423. Remove Letter To Equalize Frequency
+
+logic: 
+    * first find the all char freq
+    * then remove charcter like decrease the count of one character from freq and check all the remaning value are equal or not
+    
+*/
+
+class Solution {
+    public boolean equalFrequency(String word) {
+        
+        int arr[]=new int[26];
+        
+        
+        for(Character c:word.toCharArray()) {
+
+            arr[c-'a']+=1;
+        
+        }
+        
+        for(int i=0;i<26;i++) {
+            if(arr[i]>0){
+                arr[i]-=1;
+                if(check(arr)) return true;
+                arr[i]+=1;
+            }
+            
+        }
+        
+        return false;
+    }
+    
+    boolean check(int[] arr) {
+        int val=0;
+        for(int i:arr) {
+            
+            if(i==0) continue;
+            else if(val==0) val=i;
+            else if(val!=i) return false; 
+        }
+        return true;
+    }
+
+}
