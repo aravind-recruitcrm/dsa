@@ -1,0 +1,25 @@
+/*
+2425. Bitwise XOR of All Pairings
+https://leetcode.com/problems/bitwise-xor-of-all-pairings/
+https://www.youtube.com/watch?v=jaG4J497WT4
+
+logic : 
+     * we know that the xor of same numbers will be cancaled 
+     * so in this problem if we have even size then no need to take that , and if odd size then we need to take the xor operation of that 
+     
+*/
+
+
+class Solution {
+    public int xorAllNums(int[] nums1, int[] nums2) {
+        int ans=0;
+        int m=nums1.length;
+        int n=nums2.length;
+        
+        if(m%2==1) 
+            for(int i: nums2) ans^=i;
+        if(n%2==1) 
+            for(int i:nums1) ans^=i;
+        return ans;
+    }
+}
