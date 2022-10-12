@@ -1,0 +1,34 @@
+/*
+976. Largest Perimeter Triangle
+https://leetcode.com/problems/largest-perimeter-triangle/
+
+Logic :
+    first sort the array bcz we want the max perimeter
+    then the triangle rule is the "sum of 2 small sides should be greater than 3rd side"
+
+
+*/
+
+
+import java.util.*;
+import java.io.*;
+
+class Solution {
+    public int largestPerimeter(int[] nums) {
+        
+        Arrays.sort(nums);
+        // System.out.println(nums);
+        for(int i=nums.length-1;i>=2;i--) {
+            
+            int a=nums[i];
+            int b=nums[i-1];
+            int c=nums[i-2];
+            
+            if( b+c >a)  {
+                return a+b+c;
+            }
+            
+        }
+        return 0;
+    }
+}
