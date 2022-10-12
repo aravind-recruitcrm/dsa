@@ -1,0 +1,38 @@
+/*
+334. Increasing Triplet Subsequence
+
+https://leetcode.com/problems/increasing-triplet-subsequence/
+
+logic:
+    * take two variables  assign to max
+    * check the taken num is less than variable v1 then make the v1 as that num
+    * else then check with second variable if that is also greater then return true bcz 3 numbers are found 
+    * else modify the 2nd var to num
+
+*/
+
+class Solution {
+    public boolean increasingTriplet(int[] nums) {
+        
+        int v1=Integer.MAX_VALUE;
+        int v2=Integer.MAX_VALUE;
+        
+        for(int i:nums) {
+            
+            if(v1 >= i)  { 
+                v1=i;
+                
+            }
+            
+            else
+            {
+                if(v2 >= i) 
+                    v2=i;
+                else return true;
+            }
+            
+
+        }
+        return false;
+    }
+}
