@@ -1,0 +1,18 @@
+/*
+237. Delete Node in a Linked List
+https://leetcode.com/problems/delete-node-in-a-linked-list/
+
+logic:
+     copy the next node val to present node val and skip the next node by connecting the linked list.
+*/
+class Solution {
+    public void deleteNode(ListNode node) {
+        
+        ListNode Next=node.next;
+        node.val=Next.val;
+        if(Next!=null) {
+            node.val=Next.val;
+            node.next=Next.next;
+        }
+    }
+}
