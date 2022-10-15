@@ -1,0 +1,47 @@
+/*
+2438. Range Product Queries of Powers
+https://leetcode.com/problems/range-product-queries-of-powers/
+
+passed half TLE(did in bruteforce)
+*/
+
+class Solution {
+    public int[] productQueries(int n, int[][] queries) {
+        ArrayList<Integer> arr=new ArrayList<>();
+        
+        int[] ans=new int[queries.length];
+        
+        long val=n;
+        
+        while(n>0) {
+            
+            if( val>=n && (n & (n-1)) == 0 ) {
+                arr.add(n);
+                val-=n;
+                if(val==0) break;
+             }
+            
+            n--;
+        }
+        
+        int ar[]=new int[arr.size()];
+        
+        for(int i=0;i<arr.size();i++) {
+            ar[arr.size()-1-i]=arr.get(i);
+        }
+        
+
+
+        for(int i=0;i<queries.length;i++) {
+            val = 1;
+            for(int j=queries[i][0];j<=queries[i][1];j++) {
+                
+                val=(val*ar[j]) %1000000007;
+            }
+            ans[i]= (int)val%1000000007;
+        }
+
+        
+        return ans;
+}
+}
