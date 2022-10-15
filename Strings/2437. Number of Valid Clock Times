@@ -1,0 +1,43 @@
+/*
+2437. Number of Valid Clock Times
+https://leetcode.com/problems/number-of-valid-clock-times/
+
+logic:
+
+    check whether HH is ?? then directly multiply 24
+    and then the case may be x? or ?x so,
+    check the case 
+    
+*/
+
+class Solution {
+    public int countTime(String time) {
+        int ans=1;
+        
+        if(time.substring(0,2).equals("??")) ans*=24;
+        
+        else {
+            
+            if(time.charAt(0) == '?') { // for first H in HH
+                
+                if(time.charAt(1) < '4') ans*=3; //0,1,2
+                else ans*=2; // 0,1 
+                
+            }
+            
+            if(time.charAt(1) == '?') { // for second H in HH 
+                
+                if((time.charAt(0)-'0') < 2) ans*=10; // 0-9
+                else ans*=4; // 0-5
+                
+            }
+        }
+        
+        if(time.charAt(3)=='?') ans*=6; // for first M in MM
+        
+        if(time.charAt(4)=='?') ans*=10; // for second M in MM
+            
+
+        return ans;
+    }
+}
