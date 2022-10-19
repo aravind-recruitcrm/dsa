@@ -1,0 +1,62 @@
+/*
+38. Count and Say
+https://leetcode.com/problems/count-and-say/
+
+logic: 
+     1. make a while or  for n times
+     2. if present value is equal to previous value then just increment the count
+     2. else it is not equal so store the count and number and reset the count=1;
+*/
+class Solution {
+    public String countAndSay(int n) {
+
+        
+         String val="1";
+        
+         while( --n > 0) {
+             val=fun(val);
+         }
+        
+        return val;
+    }
+    
+    public String fun(String val) {
+
+        int count=1;
+        char prev=val.charAt(0);
+        String ans="";
+        
+        for(int i=1;i<val.length();i++) {
+            char pres=val.charAt(i);
+            if(pres==prev) count++;
+            else {
+                ans+=count+""+prev;
+                  prev=pres;
+                count=1;
+            }
+        }
+        ans+=count+""+prev;
+        return ans;
+}
+}
+
+
+// class Solution {
+//     public String countAndSay(int n) {
+//         String ret="1";
+//         while(n-->1) {
+//             StringBuilder make=new StringBuilder();
+//             for(int i=0;i<ret.length();i++) {
+//                 char ch=ret.charAt(i);
+//                 int freq=1;
+//                 while(i+1<ret.length() && ret.charAt(i)==ret.charAt(i+1)) {
+//                     freq++;
+//                     i++;
+//                 }
+//                 make.append(freq+""+ch);
+//             }
+//             ret=make.toString();
+//         }
+//         return ret;
+//     }
+// }
