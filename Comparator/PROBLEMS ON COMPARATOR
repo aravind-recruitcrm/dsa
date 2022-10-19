@@ -16,3 +16,10 @@
     return 1;
     }
     }
+  
+ 4. we need to use the string1.compareTo(string2) in the comparator
+    example: 
+      PriorityQueue<Pair> pq = new PriorityQueue<>((Pair a, Pair b)-> {
+            if(a.freq==b.freq) return (a.word).compareTo(b.word);
+            return b.freq-a.freq;
+        });
