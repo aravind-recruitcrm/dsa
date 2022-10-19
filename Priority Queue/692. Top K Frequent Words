@@ -1,0 +1,50 @@
+/*
+692. Top K Frequent Words
+https://leetcode.com/problems/top-k-frequent-words/
+
+Logic: 
+    we need to  Return the answer sorted by the frequency from highest to lowest. Sort the words with the same frequency by their lexicographical order.
+    1.first use the hashmap and find the freq of each word 
+    2.then take the pair and store the word and its freq
+    3.we use the priorityqueue(in pq we have only parameter so we need to use the pair) and 
+    4. use the comparator to sort the pair in which first we sort on freq, then if two words have same freq then we sort lexicographically .
+    5. then take the K elements from the pq and store them into arraylist;
+    
+
+*/
+
+class Pair {
+    int freq;
+    String word;
+    Pair(int freq, String word) {
+        this.freq=freq;
+        this.word=word;
+    }
+}
+
+class Solution {
+    
+    public List<String> topKFrequent(String[] words, int k) {
+        
+        List<String> ans=new ArrayList<String>();
+        HashMap<String,Integer> map = new HashMap<>();
+        PriorityQueue<Pair> pq = new PriorityQueue<>((Pair a, Pair b)-> {
+            if(a.freq==b.freq) return (a.word).compareTo(b.word);
+            return b.freq-a.freq;
+        });
+       
+        for(String s:words) {
+            map.put(s,map.getOrDefault(s,0)+1);
+        }
+        
+        for(String key:map.keySet()) {
+            pq.add(new Pair(map.get(key),key));
+        }
+
+        for(int i=0;i<k;i++) 
+            ans.add(pq.poll().word);
+        
+        return ans;
+        
+    }
+}
