@@ -1,0 +1,76 @@
+/*
+13. Roman to Integer
+https://leetcode.com/problems/roman-to-integer/
+
+logic 1:
+    we find the pairs of possiblity and  traverse from reverse then check that exist if found then substract else add;
+
+logic 2: 
+     we traverse reverse and when we found the number at i < i+1 then substract else add 
+
+
+*/
+
+class Solution {
+    public int romanToInt(String s) {
+        
+        HashMap<Character,Integer> map=new HashMap<>();
+        map.put('I',1);
+        map.put('V',5);
+        map.put('X',10);
+        map.put('L',50);
+        map.put('C',100);
+        map.put('D',500);
+        map.put('M',1000);
+        
+        int sum=map.get(s.charAt(s.length()-1));
+        char prev=s.charAt(s.length()-1);
+        
+        for(int i=s.length()-2;i>=0;i--) {
+            
+            char pres=s.charAt(i);
+            if(((prev=='V'|| prev=='X') && pres=='I') || ((prev=='L'|| prev=='C') && pres=='X')  || ((prev=='D'|| prev=='M') && pres=='C') ) 
+                sum-=map.get(pres);
+            else sum+=map.get(pres);
+            // System.out.println(sum);
+            prev=pres; 
+        }
+        return sum;
+// v i
+// x i
+// L x 
+// c x 
+// d c 
+// m c
+    }
+}
+
+
+/*
+class Solution {
+    public int romanToInt(String s) {
+        HashMap<Character,Integer> map=new HashMap<>();
+        map.put('I',1);
+        map.put('V',5);
+        map.put('X',10);
+        map.put('L',50);
+        map.put('C',100);
+        map.put('D',500);
+        map.put('M',1000);
+        // map.put('I',1);
+        int sum=map.get(s.charAt(s.length()-1));
+        for(int i=s.length()-2;i>=0;i--){
+            if((map.get(s.charAt(i))<(map.get(s.charAt(i+1)))))
+               sum-=map.get(s.charAt(i));
+            else
+               sum+=map.get(s.charAt(i));
+               
+        }
+        return sum;
+        
+        
+    }
+}
+
+*/
+
