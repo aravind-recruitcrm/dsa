@@ -1,0 +1,101 @@
+1.  * variables are call by value(means each recurrsion function will have the different value) that means no need to modify in backtarcking,
+    * all other datastructue except the varibales are call by reference( means in each recurssion function will have the same value) need to modify in backtracking 
+ 
+  
+2.  * list is a interface and arraylist is a class so we should create them as ( List<Integer> list=new ArrayList<>() ) or (  for  list of list type = List<List<Integer>> list =new ArrayList<>()  ) 
+
+3.  QUEUE -> front(front pointer is incremented when ele are "deleted") -------- rear(rear pointer is incremented when "insertion" of ele are there)
+
+4. pq -- add(), peek(), poll()
+
+
+
+
+->Comparator
+->Used to  compare 2D array
+Arrays.sort(array, Comparator.comparingDouble(o -> o[0]));
+(or)
+Arrays.sort(array, (a, b) -> Integer.compare(a[0], b[0]));
+(or)
+listOfBooks.sort(Comparator.comparing((Book b) -> b.getAuthor()).thenComparing((Book b) -> b.getPrice());
+(or)
+listOfBooks.sort(Comparator.comparing(Book::getAuthor));
+
+->Read more: https://javarevisited.blogspot.com/2021/09/comparator-comparing-thenComparing-example-java-.html#ixzz7dCt1tx83
+
+eg: array = [[1,3],[2,6],[8,10],[15,18],[2,3],[9,10]]
+output: array = [[1,3],[2,6],[2,3],[8,10],[9,10],[15,18]]
+
+
+->PriorityQueue 
+PriorityQueue<Character> pq = new PriorityQueue<>(new Comparator<>()
+ {
+     @Override
+     public int compare(Character a, Character b)
+     {
+         return map.get(b)-map.get(a);
+     }
+
+ });
+
+->Iteration of Map
+Method-1:
+for(Map.Entry<Integer, Integer> entry : map.entrySet())
+{
+   entry.getKey();    //returns key
+   entry.getValue();  //returns value
+}
+Method-2:
+//hm.keySet() returns a list
+ArrayList<Integer> array = new ArrayList(hm.keySet()); 
+
+// using keySet() for iteration over keys
+for (String key : hm.keySet())
+    System.out.println("key: " + name);
+
+// using values() for iteration over values
+for (String value : hm.values())
+    System.out.println("value: " + value);
+   
+   
+   
+->Iteration of Set
+Method-1: //Using for-each loop
+for(String values : set){
+   System.out.println(values);
+}
+Method-2: //iterating through the iterator
+set.add(1);set.add(2);
+Iterator value = set.iterator();
+while (value.hasNext()) {
+    System.out.println(value.next());
+}
+
+
+For TreeMap:
+->map.ceilingKey(), returns the equal or closest greater key in the map
+->map.floorgKey(), returns the equal or closest lesser key in the map
+
+->map.higherKey(), returns the strictly greater element key in the map
+->map.lowerKey(), returns the strictly lesser element key in the map
+
+->map.firstKey(), returns first key of the map
+->map.lastKey(), returns last key of the map
+->map.pollFirstEntry(), retrives and removes first key-value from the map
+->map.pollLastEntry(), retrives and removes last key-value from the map
+
+For TreeSet: Method functionalities are same as TreeMap, instead of keys it retrives the values
+->set.ceiling()
+->set.floor()
+->set.higher()
+->set.lower()
+->set.first()
+->set.last()
+->set.pollFirst()
+->set.pollLast()
+
+
+
+->Binary Search is done on Sorted Array
+->Binary Search can also applied on Unsorted Array, This kind of problems called as *Binary Search on Answers*.
+   
