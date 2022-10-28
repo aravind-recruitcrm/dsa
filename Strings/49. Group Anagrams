@@ -1,0 +1,29 @@
+// 49. Group Anagrams
+
+
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        
+
+        List<List<String>> ans = new ArrayList<>();
+        
+        HashMap<String,List<String>> map = new HashMap<>();
+        
+        for(String s:strs) {
+            
+            char[] ch=s.toCharArray();
+            Arrays.sort(ch);
+            String sorted = String.valueOf(ch); 
+            // System.out.println(sorted);
+            List<String> l =map.getOrDefault(sorted, new ArrayList<String>());
+            l.add(s);
+            map.put(sorted, l);
+        }
+        // System.out.println(map);
+        
+        // for(List<String> l : map.values()) ans.add(l);
+        
+        
+        return new ArrayList<>(map.values());
+    }
+}
