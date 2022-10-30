@@ -1,0 +1,88 @@
+/*
+2456. Most Popular Video Creator
+#hahmap of pair
+
+logic:
+    1. first we take a pair of that has the sum of all views till now, highest amount all, and that id of highest string 
+    2. take a hashmap of key is string type and value of Pair type
+    3. traverse the given values and store them into the hashmap 
+    4. while storing the values take the max value that has the maximum sum among all 
+    5. after storing we have hashmap that store the sum of each creator 
+    6. then use the max value iterate the hashmap and find the details of the max value , if we have multiple values also it can find 
+    7. store into arraylist and return them
+
+*/
+
+class Pair {
+    long  sum;
+    long  highest;
+    String id;
+    Pair(long sum, long highest, String id) {
+        this.sum=sum;
+        this.highest=highest;
+        this.id=id;
+    }
+}
+
+class Solution {
+    public List<List<String>> mostPopularCreator(String[] creators, String[] ids, int[] views) {
+        
+        List<List<String>> ans = new ArrayList<>();
+        long max=0;
+        
+        HashMap<String, Pair> map = new HashMap<>();
+        
+        for(int i=0;i<creators.length;i++) {
+            
+            if(!map.containsKey(creators[i])) 
+                map.put(creators[i],new Pair(views[i],views[i],ids[i]));
+            else {
+            Pair prev = map.get(creators[i]);
+            long sum=prev.sum;
+            sum+=views[i];
+            
+            long highest=prev.highest;
+            String id=prev.id;
+            if(highest <= views[i]) {
+                if(highest < views[i]) 
+                {
+                    highest=views[i];
+                    id=ids[i];
+                }
+                else {
+                    if(ids[i].compareTo(id) == -1) id=ids[i];
+                }
+                    
+            }
+            map.put(creators[i],new Pair(sum, highest, id));
+        
+            }  
+            Pair p = map.get(creators[i]);
+            max=Math.max(max,p.sum);
+            // System.out.println(max);
+        }
+        
+
+        // System.out.println(max);
+        // System.out.println(map);
+        // for (Map.Entry<String,Pair> entry : map.entrySet()) {
+        //     Pair p = entry.getValue();
+        //     System.out.println( entry.getKey() + " "+p.sum+" "+p.highest+" "+p.id );
+        // }
+
+        
+        for (Map.Entry<String,Pair> entry : map.entrySet()) {
+            String key =entry.getKey();
+            Pair p = entry.getValue();
+            
+            if(p.sum == max) {
+                List<String> l = new ArrayList<>();
+                l.add(key);
+                l.add(p.id);
+                ans.add(l);
+            }
+        }
+
+       return ans;
+    }
+}
