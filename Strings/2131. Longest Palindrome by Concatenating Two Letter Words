@@ -1,0 +1,62 @@
+/*
+2131. Longest Palindrome by Concatenating Two Letter Words
+
+logic:
+     use one hashmap for normal freq;
+     use another for storing the same ele like "aa,bb,cc,dd,..."
+     traverse the array
+     if the reverse that value is already exist that means their is a chance , so decrease the count of that original element 
+     if original is not exist then store them ,and while storing if that ele is same ele(aa,bb,cc) in sameMap 
+     finaly check if the samemap size is > 1 then chance to insert in the ans at middle
+     
+another easy logic:
+     use same , but use the single and try it
+
+
+
+
+
+*/
+
+class Solution {
+    public int longestPalindrome(String[] words) {
+        
+        int count=0;
+        HashMap<String,Integer> map = new HashMap<>();
+        HashMap<String,Integer> sameMap = new HashMap<>();
+        
+        for(String s: words) {
+            System.out.println(s);
+            String rev=s.charAt(1)+""+s.charAt(0)+"";
+            
+            if(!map.containsKey(rev)) {
+                
+                map.put(s, map.getOrDefault(s,0)+1);
+                if(s.charAt(0)==s.charAt(1)) 
+                    sameMap.put(s, sameMap.getOrDefault(rev,0)+1);
+            }
+            else{
+
+                
+                count+=4;
+                if(map.get(rev) > 1){
+                     map.put(rev, map.get(rev)-1);
+                    if(sameMap.containsKey(s))
+                        sameMap.put(rev, sameMap.get(s)-1);
+                }
+                else {
+                    map.remove(rev);
+                    if(sameMap.containsKey(rev))
+                        sameMap.remove(rev);
+                }
+                   
+            }
+            
+
+            
+        }
+        if(sameMap.size()>0) count+=2;
+
+        return count;
+    }
+}
