@@ -1,0 +1,88 @@
+// 899. Orderly Queue
+
+
+// https://leetcode.com/problems/orderly-queue/discuss/165878/C%2B%2BJavaPython-Sort-String-or-Rotate-String
+
+class Solution {
+    // public String orderlyQueue(String s, int k) {
+    public String orderlyQueue(String S, int K) {
+        if (K > 1) {
+            char S2[] = S.toCharArray();
+            Arrays.sort(S2);
+            return new String(S2);
+        }
+        String res = S;
+        for (int i = 1; i < S.length(); i++) {
+            String tmp = S.substring(i) + S.substring(0, i);
+            if (res.compareTo(tmp) > 0) res = tmp;
+        }
+        return res;
+    }
+}
+
+
+
+
+// class Solution {
+//     public String orderlyQueue(String s, int k) {
+//         ArrayList<Character> arr=new ArrayList<>();
+//         // char[] arr = s.toCharArray();
+//         String ans=s;
+//         for(Character c: s.toCharArray()) {
+//             arr.add(c);
+//         }
+        
+//             ArrayList<Character> before=(ArrayList<Character>)arr.clone();
+//             ArrayList<Character> after=(ArrayList<Character>)arr.clone();
+        
+//         while(true) {
+//             System.out.println(before);
+//             int maxIndex=0;
+//             for(int i=1;i<k;i++) {
+//                 if(arr.get(0) > arr.get(i)) maxIndex=i;
+//             }
+            
+//             Character removedChar =after.get(maxIndex);
+//             after.remove(maxIndex);
+//             after.add(removedChar);
+            
+//             StringBuilder sb=new StringBuilder();
+//             for(Character c:after) {
+//                 sb.append(c);
+//             }
+//             if(ans.compareTo(sb.toString()) > 1) ans=sb.toString(); 
+//             if(after.equals(before) || after.equals(arr)) break;
+//             before=after;
+            
+            
+//         }
+//         System.out.println(ans);
+//         return "";
+        
+//     }
+// }
+// /*
+// bacdd 3
+// baddc
+// badcd
+// bacdd
+
+// abcdd
+
+// bacdd
+
+// acddb
+// addbc
+// adbcd
+// abcdd
+
+
+// bacdd
+// acddb
+// addbc
+// adbcd
+// abcdd
+
+
+
+// */
