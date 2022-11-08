@@ -1,0 +1,84 @@
+// 1544. Make The String Great
+
+
+class Solution {
+    public String makeGood2(String s) {
+        
+        int i = 0;
+        StringBuilder sb = new StringBuilder();
+        
+        while(i<s.length()-1) {
+            if(Math.abs(s.charAt(i)-s.charAt(i+1)) == 32) {
+                i += 2;
+            } else {
+                sb.append(s.charAt(i++));
+            }
+        }
+        
+        if(i==s.length()-1) {
+            sb.append(s.charAt(i));
+        }
+        
+        if(sb.length()==s.length()) {
+            return s;
+        }
+        
+        return makeGood(sb.toString());
+    }
+    
+    public static String makeGood(String s) {
+        
+        StringBuilder sb = new StringBuilder();
+        int i = 1;
+        
+        for(;i<s.length();i++) {
+            if((Math.abs((int)(s.charAt(i))-(int)(s.charAt(i-1))))==32) {
+                i++;
+            } else {
+                sb.append(s.charAt(i-1));
+            }
+            
+        }
+        
+        if(i == s.length()) {
+            sb.append(s.charAt(i-1));
+        }
+        
+        if(s.length()==sb.length()) {
+            return s;
+        }
+        
+        return makeGood(sb.toString());
+    }
+}
+
+
+
+
+
+// class Solution {
+//     public String makeGood(String s) {
+        
+//         Stack<Integer> st=new Stack<>();
+        
+//         for(Character c:s.toCharArray()) {
+            
+//             int val=c;
+//             // System.out.println(val);
+            
+//             if(st.isEmpty()) st.push(val);
+//             else if(Math.abs(st.peek()-val)==32) st.pop();
+//             else st.push(val);
+//         }
+//         // System.out.println(st);
+//         StringBuilder ans=new StringBuilder();
+//         for(Integer i:st) {
+//             char c=(char)((int)i);
+//             // System.out.println((int)i);
+//             ans.append(c);
+//         }
+            
+        
+//         return ans.toString();
+//     }
+// }
