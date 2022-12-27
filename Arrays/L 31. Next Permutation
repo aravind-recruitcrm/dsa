@@ -1,0 +1,48 @@
+/*
+31. Next Permutation
+
+https://www.youtube.com/watch?v=LuLCLgMElus
+*/
+
+class Solution {
+    public void nextPermutation(int[] nums) {
+        int pos=-1;
+
+        for(int i=nums.length-1;i>0;i--) {
+            if(nums[i] > nums[i-1]) {
+                pos=i;
+                break;
+            }
+        }
+        if(pos==-1) { // if the order is descending order then return ascending order
+            Arrays.sort(nums);
+            return ;
+        }
+
+        pos--;
+        int pos2=-1;
+        for(int i=nums.length-1;i>pos;i--) { // finding the correct position of that value
+            if(nums[pos] < nums[i]) {
+                pos2=i;
+                break;
+            }
+        }
+        //swap that values
+        int temp=nums[pos];
+        nums[pos]=nums[pos2];
+        nums[pos2]=temp;
+
+        //reverse the specific array
+
+        pos2=nums.length-1;
+        pos++;
+        while(pos<pos2) {
+            temp=nums[pos];
+            nums[pos]=nums[pos2];
+            nums[pos2]=temp;
+            pos2--;
+            pos++;
+        }
+
+    }
+}
