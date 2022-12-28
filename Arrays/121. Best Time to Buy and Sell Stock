@@ -1,0 +1,25 @@
+/*
+121. Best Time to Buy and Sell Stock
+
+Logic:
+    1. take ans to store the maximum diff
+    2. take max to store the max value in which is in the right side
+    3. now start from right to left from size-2;
+
+*/
+
+class Solution {
+    public int maxProfit(int[] prices) {
+        int max =prices[prices.length-1];
+        int ans =0;
+
+        for(int i=prices.length-2;i>=0;i--) { 
+            ans=Math.max(ans,max-prices[i]);
+            max=Math.max(max, prices[i]);
+            
+        }
+        if(ans<0) return 0;
+        return ans;
+
+    }
+}
